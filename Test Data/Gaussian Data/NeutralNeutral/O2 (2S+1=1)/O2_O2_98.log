@@ -1,0 +1,995 @@
+ Entering Gaussian System, Link 0=g16
+ Input=O2_O2_98.com
+ Output=O2_O2_98.log
+ Initial command:
+ /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l1.exe "/gpfs/gpfs1/scratch/c7441284/ForceFieldModel/O2_NN_1/Gau-1678593.inp" -scrdir="/gpfs/gpfs1/scratch/c7441284/ForceFieldModel/O2_NN_1/"
+ Entering Link 1 = /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l1.exe PID=   1678594.
+  
+ Copyright (c) 1988,1990,1992,1993,1995,1998,2003,2009,2016,
+            Gaussian, Inc.  All Rights Reserved.
+  
+ This is part of the Gaussian(R) 16 program.  It is based on
+ the Gaussian(R) 09 system (copyright 2009, Gaussian, Inc.),
+ the Gaussian(R) 03 system (copyright 2003, Gaussian, Inc.),
+ the Gaussian(R) 98 system (copyright 1998, Gaussian, Inc.),
+ the Gaussian(R) 94 system (copyright 1995, Gaussian, Inc.),
+ the Gaussian 92(TM) system (copyright 1992, Gaussian, Inc.),
+ the Gaussian 90(TM) system (copyright 1990, Gaussian, Inc.),
+ the Gaussian 88(TM) system (copyright 1988, Gaussian, Inc.),
+ the Gaussian 86(TM) system (copyright 1986, Carnegie Mellon
+ University), and the Gaussian 82(TM) system (copyright 1983,
+ Carnegie Mellon University). Gaussian is a federally registered
+ trademark of Gaussian, Inc.
+  
+ This software contains proprietary and confidential information,
+ including trade secrets, belonging to Gaussian, Inc.
+  
+ This software is provided under written license and may be
+ used, copied, transmitted, or stored only in accord with that
+ written license.
+  
+ The following legend is applicable only to US Government
+ contracts under FAR:
+  
+                    RESTRICTED RIGHTS LEGEND
+  
+ Use, reproduction and disclosure by the US Government is
+ subject to restrictions as set forth in subparagraphs (a)
+ and (c) of the Commercial Computer Software - Restricted
+ Rights clause in FAR 52.227-19.
+  
+ Gaussian, Inc.
+ 340 Quinnipiac St., Bldg. 40, Wallingford CT 06492
+  
+  
+ ---------------------------------------------------------------
+ Warning -- This program may not be used in any manner that
+ competes with the business of Gaussian, Inc. or will provide
+ assistance to any competitor of Gaussian, Inc.  The licensee
+ of this program is prohibited from giving any competitor of
+ Gaussian, Inc. access to this program.  By using this program,
+ the user acknowledges that Gaussian, Inc. is engaged in the
+ business of creating and licensing software in the field of
+ computational chemistry and represents and warrants to the
+ licensee that it is not a competitor of Gaussian, Inc. and that
+ it will not use this program in any manner prohibited above.
+ ---------------------------------------------------------------
+  
+
+ Cite this work as:
+ Gaussian 16, Revision A.03,
+ M. J. Frisch, G. W. Trucks, H. B. Schlegel, G. E. Scuseria, 
+ M. A. Robb, J. R. Cheeseman, G. Scalmani, V. Barone, 
+ G. A. Petersson, H. Nakatsuji, X. Li, M. Caricato, A. V. Marenich, 
+ J. Bloino, B. G. Janesko, R. Gomperts, B. Mennucci, H. P. Hratchian, 
+ J. V. Ortiz, A. F. Izmaylov, J. L. Sonnenberg, D. Williams-Young, 
+ F. Ding, F. Lipparini, F. Egidi, J. Goings, B. Peng, A. Petrone, 
+ T. Henderson, D. Ranasinghe, V. G. Zakrzewski, J. Gao, N. Rega, 
+ G. Zheng, W. Liang, M. Hada, M. Ehara, K. Toyota, R. Fukuda, 
+ J. Hasegawa, M. Ishida, T. Nakajima, Y. Honda, O. Kitao, H. Nakai, 
+ T. Vreven, K. Throssell, J. A. Montgomery, Jr., J. E. Peralta, 
+ F. Ogliaro, M. J. Bearpark, J. J. Heyd, E. N. Brothers, K. N. Kudin, 
+ V. N. Staroverov, T. A. Keith, R. Kobayashi, J. Normand, 
+ K. Raghavachari, A. P. Rendell, J. C. Burant, S. S. Iyengar, 
+ J. Tomasi, M. Cossi, J. M. Millam, M. Klene, C. Adamo, R. Cammi, 
+ J. W. Ochterski, R. L. Martin, K. Morokuma, O. Farkas, 
+ J. B. Foresman, and D. J. Fox, Gaussian, Inc., Wallingford CT, 2016.
+ 
+ ******************************************
+ Gaussian 16:  ES64L-G16RevA.03 25-Dec-2016
+                14-Jan-2023 
+ ******************************************
+ %NProcShared=6
+ Will use up to    6 processors via shared memory.
+ %Mem=5GB
+ %OldChk=O2_O2_97.chk
+ %Chk=O2_O2_98.chk
+ Copying data from "O2_O2_97.chk" to current chk file "O2_O2_98.chk"
+ IOpt=  2 FromEx=T IUOpen= 4 IOptOp= 5 NList=   0 IFRang= 0 IUIn= 4 IUOut= 2.
+ ---------------------------------------------------------------
+ #p ROCCSD(T)/cc-pVTZ Guess=Read SCF=(VeryTight,CDIIS,VShift=10)
+ ---------------------------------------------------------------
+ 1/38=1,172=1/1;
+ 2/12=2,17=6,18=5,40=1/2;
+ 3/5=16,6=1,11=2,25=1,30=1,116=101/1,2,3;
+ 4/5=1/1;
+ 5/5=2,10=10,17=3,22=12,38=6/2;
+ 8/5=-1,6=4,9=120000,10=1/1,4;
+ 9/5=7,14=2/13;
+ 6/7=2,8=2,9=2,10=2/1;
+ 99/5=1,9=1/99;
+ Leave Link    1 at Sat Jan 14 22:00:12 2023, MaxMem=   671088640 cpu:              18.9 elap:               3.8
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l101.exe)
+ --------
+ O2_O2_98
+ --------
+ Symbolic Z-matrix:
+ Charge =  0 Multiplicity = 1
+ O                     0.67619   0.        0. 
+ O                    -0.67619   0.        0. 
+ O                     6.3888    0.        0. 
+ O                     5.03642   0.        0. 
+ 
+ ITRead=  0  0  0  0
+ MicOpt= -1 -1 -1 -1
+ NAtoms=      4 NQM=        4 NQMF=       0 NMMI=      0 NMMIF=      0
+                NMic=       0 NMicF=      0.
+                    Isotopes and Nuclear Properties:
+ (Nuclear quadrupole moments (NQMom) in fm**2, nuclear magnetic moments (NMagM)
+  in nuclear magnetons)
+
+  Atom         1           2           3           4
+ IAtWgt=          16          16          16          16
+ AtmWgt=  15.9949146  15.9949146  15.9949146  15.9949146
+ NucSpn=           0           0           0           0
+ AtZEff=  -0.0000000  -0.0000000  -0.0000000  -0.0000000
+ NQMom=    0.0000000   0.0000000   0.0000000   0.0000000
+ NMagM=    0.0000000   0.0000000   0.0000000   0.0000000
+ AtZNuc=   8.0000000   8.0000000   8.0000000   8.0000000
+ Leave Link  101 at Sat Jan 14 22:00:19 2023, MaxMem=   671088640 cpu:               1.1 elap:               5.7
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l202.exe)
+                          Input orientation:                          
+ ---------------------------------------------------------------------
+ Center     Atomic      Atomic             Coordinates (Angstroms)
+ Number     Number       Type             X           Y           Z
+ ---------------------------------------------------------------------
+      1          8           0        0.676190    0.000000    0.000000
+      2          8           0       -0.676190    0.000000    0.000000
+      3          8           0        6.388803    0.000000    0.000000
+      4          8           0        5.036423    0.000000    0.000000
+ ---------------------------------------------------------------------
+                    Distance matrix (angstroms):
+                    1          2          3          4
+     1  O    0.000000
+     2  O    1.352380   0.000000
+     3  O    5.712613   7.064993   0.000000
+     4  O    4.360233   5.712613   1.352380   0.000000
+ Stoichiometry    O4
+ Framework group  D*H[C*(OO.OO)]
+ Deg. of freedom     2
+ Full point group                 D*H     NOp   8
+ Largest Abelian subgroup         D2H     NOp   8
+ Largest concise Abelian subgroup C2      NOp   2
+                         Standard orientation:                         
+ ---------------------------------------------------------------------
+ Center     Atomic      Atomic             Coordinates (Angstroms)
+ Number     Number       Type             X           Y           Z
+ ---------------------------------------------------------------------
+      1          8           0        0.000000    0.000000    2.180117
+      2          8           0        0.000000    0.000000    3.532497
+      3          8           0        0.000000    0.000000   -3.532497
+      4          8           0        0.000000    0.000000   -2.180117
+ ---------------------------------------------------------------------
+ Rotational constants (GHZ):           0.0000000           0.9168192           0.9168192
+ Leave Link  202 at Sat Jan 14 22:00:19 2023, MaxMem=   671088640 cpu:               0.4 elap:               0.1
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l301.exe)
+ Standard basis: CC-pVTZ (5D, 7F)
+ Ernie: Thresh=  0.10000D-02 Tol=  0.10000D-05 Strict=F.
+ Ernie:  12 primitive shells out of 104 were deleted.
+ There are    32 symmetry adapted cartesian basis functions of AG  symmetry.
+ There are     6 symmetry adapted cartesian basis functions of B1G symmetry.
+ There are    16 symmetry adapted cartesian basis functions of B2G symmetry.
+ There are    16 symmetry adapted cartesian basis functions of B3G symmetry.
+ There are     6 symmetry adapted cartesian basis functions of AU  symmetry.
+ There are    32 symmetry adapted cartesian basis functions of B1U symmetry.
+ There are    16 symmetry adapted cartesian basis functions of B2U symmetry.
+ There are    16 symmetry adapted cartesian basis functions of B3U symmetry.
+ There are    26 symmetry adapted basis functions of AG  symmetry.
+ There are     6 symmetry adapted basis functions of B1G symmetry.
+ There are    14 symmetry adapted basis functions of B2G symmetry.
+ There are    14 symmetry adapted basis functions of B3G symmetry.
+ There are     6 symmetry adapted basis functions of AU  symmetry.
+ There are    26 symmetry adapted basis functions of B1U symmetry.
+ There are    14 symmetry adapted basis functions of B2U symmetry.
+ There are    14 symmetry adapted basis functions of B3U symmetry.
+   120 basis functions,   208 primitive gaussians,   140 cartesian basis functions
+    16 alpha electrons       16 beta electrons
+       nuclear repulsion energy        74.5035881286 Hartrees.
+ IExCor=    0 DFT=F Ex=HF Corr=None ExCW=0 ScaHFX=  1.000000
+ ScaDFX=  1.000000  1.000000  1.000000  1.000000 ScalE2=  1.000000  1.000000
+ IRadAn=      5 IRanWt=     -1 IRanGd=            0 ICorTp=0 IEmpDi=  4
+ NAtoms=    4 NActive=    4 NUniq=    2 SFac= 4.00D+00 NAtFMM=   60 NAOKFM=F Big=F
+ Integral buffers will be    131072 words long.
+ Raffenetti 2 integral format.
+ Two-electron integral symmetry is turned on.
+ Leave Link  301 at Sat Jan 14 22:00:19 2023, MaxMem=   671088640 cpu:               0.2 elap:               0.0
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l302.exe)
+ NPDir=0 NMtPBC=     1 NCelOv=     1 NCel=       1 NClECP=     1 NCelD=      1
+         NCelK=      1 NCelE2=     1 NClLst=     1 CellRange=     0.0.
+ One-electron integrals computed using PRISM.
+ One-electron integral symmetry used in STVInt
+ NBasis=   120 RedAO= T EigKep=  7.45D-03  NBF=    26     6    14    14     6    26    14    14
+ NBsUse=   120 1.00D-06 EigRej= -1.00D+00 NBFU=    26     6    14    14     6    26    14    14
+ Leave Link  302 at Sat Jan 14 22:00:19 2023, MaxMem=   671088640 cpu:               1.0 elap:               0.2
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l303.exe)
+ DipDrv:  MaxL=1.
+ Leave Link  303 at Sat Jan 14 22:00:19 2023, MaxMem=   671088640 cpu:               0.2 elap:               0.0
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l401.exe)
+ Initial guess from the checkpoint file:  "O2_O2_98.chk"
+ B after Tr=     0.000000    0.000000    0.000000
+         Rot=    1.000000    0.000000    0.000000    0.000000 Ang=   0.00 deg.
+ Guess basis will be translated and rotated to current coordinates.
+ JPrj=2 DoOrth=T DoCkMO=T.
+ Initial guess orbital symmetries:
+       Occupied  (SGG) (SGU) (SGG) (SGU) (SGG) (SGU) (SGG) (SGU)
+                 (SGG) (SGU) (PIU) (PIU) (PIG) (PIG) (PIU) (PIU)
+       Virtual   (PIG) (PIG) (SGG) (SGU) (SGG) (SGU) (PIU) (PIU)
+                 (PIG) (PIG) (SGG) (SGU) (PIU) (PIU) (PIG) (PIG)
+                 (SGU) (SGG) (SGG) (SGU) (PIU) (PIU) (PIG) (PIG)
+                 (DLTG) (DLTG) (DLTU) (DLTU) (DLTG) (DLTG) (DLTU)
+                 (DLTU) (SGG) (SGU) (PIU) (PIU) (PIG) (PIG) (SGG)
+                 (SGU) (PIU) (PIU) (PIG) (PIG) (SGG) (SGU) (PIU)
+                 (PIU) (PIG) (PIG) (SGG) (SGU) (PIU) (PIU) (PIG)
+                 (PIG) (DLTG) (DLTG) (DLTU) (DLTU) (SGG) (SGU)
+                 (PHIU) (PHIU) (PHIG) (PHIG) (PHIU) (PHIU) (PHIG)
+                 (PHIG) (DLTG) (DLTG) (DLTU) (DLTU) (PIU) (PIU)
+                 (PIG) (PIG) (DLTG) (DLTG) (DLTU) (DLTU) (DLTG)
+                 (DLTG) (DLTU) (DLTU) (PIU) (PIU) (PIG) (PIG) (SGG)
+                 (SGU) (SGG) (SGU) (SGG) (SGU) (PIU) (PIU) (PIG)
+                 (PIG) (SGG) (SGU) (SGG) (SGU)
+ The electronic state of the initial guess is 1-SGG.
+ Leave Link  401 at Sat Jan 14 22:00:19 2023, MaxMem=   671088640 cpu:               0.6 elap:               0.1
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l502.exe)
+ Keep R1 and R2 ints in memory in symmetry-blocked form, NReq=29773135.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=           0 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=       600 IOpCl=  0 I1Cent=           0 NGrid=           0
+         NMat0=    1 NMatS0=   7260 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Petite list used in FoFCou.
+ Restricted open shell SCF:
+ Using DIIS extrapolation, IDIIS=    10.
+ NGot=   671088640 LenX=   664240612 LenY=   664220571
+ Requested convergence on RMS density matrix=1.00D-08 within 128 cycles.
+ Requested convergence on MAX density matrix=1.00D-06.
+ Requested convergence on             energy=1.00D-06.
+ Virtual orbitals will be shifted by   0.010 hartree.
+ No special actions if energy rises.
+
+ Cycle   1  Pass 1  IDiag  1:
+ E= -298.685010464441    
+ DIIS: error= 2.70D-05 at cycle   1 NSaved=   1.
+ NSaved= 1 IEnMin= 1 EnMin= -298.685010464441     IErMin= 1 ErrMin= 2.70D-05
+ ErrMax= 2.70D-05  0.00D+00 EMaxC= 1.00D+00 BMatC= 3.21D-08 BMatP= 3.21D-08
+ IDIUse=1 WtCom= 1.00D+00 WtEn= 0.00D+00
+ Coeff-Com:  0.100D+01
+ Coeff:      0.100D+01
+ Gap=     0.096 Goal=   None    Shift=    0.010
+ RMSDP=3.48D-06 MaxDP=6.47D-05              OVMax= 1.34D-04
+
+ Cycle   2  Pass 1  IDiag  1:
+ E= -298.685010514614     Delta-E=       -0.000000050173 Rises=F Damp=F
+ DIIS: error= 2.84D-05 at cycle   2 NSaved=   2.
+ NSaved= 2 IEnMin= 2 EnMin= -298.685010514614     IErMin= 1 ErrMin= 2.70D-05
+ ErrMax= 2.84D-05  0.00D+00 EMaxC= 1.00D+00 BMatC= 3.37D-08 BMatP= 3.21D-08
+ IDIUse=1 WtCom= 1.00D+00 WtEn= 0.00D+00
+ Coeff-Com:  0.513D+00 0.487D+00
+ Coeff:      0.513D+00 0.487D+00
+ Gap=     0.096 Goal=   None    Shift=    0.010
+ RMSDP=7.09D-07 MaxDP=1.25D-05 DE=-5.02D-08 OVMax= 4.13D-05
+
+ Cycle   3  Pass 1  IDiag  1:
+ E= -298.685010534973     Delta-E=       -0.000000020358 Rises=F Damp=F
+ DIIS: error= 1.47D-05 at cycle   3 NSaved=   3.
+ NSaved= 3 IEnMin= 3 EnMin= -298.685010534973     IErMin= 3 ErrMin= 1.47D-05
+ ErrMax= 1.47D-05  0.00D+00 EMaxC= 1.00D+00 BMatC= 3.52D-09 BMatP= 3.21D-08
+ IDIUse=1 WtCom= 1.00D+00 WtEn= 0.00D+00
+ Coeff-Com: -0.915D-01 0.192D+00 0.900D+00
+ Coeff:     -0.915D-01 0.192D+00 0.900D+00
+ Gap=     0.096 Goal=   None    Shift=    0.010
+ RMSDP=5.44D-07 MaxDP=6.89D-06 DE=-2.04D-08 OVMax= 5.15D-05
+
+ Cycle   4  Pass 1  IDiag  1:
+ E= -298.685010544023     Delta-E=       -0.000000009051 Rises=F Damp=F
+ DIIS: error= 9.11D-06 at cycle   4 NSaved=   4.
+ NSaved= 4 IEnMin= 4 EnMin= -298.685010544023     IErMin= 4 ErrMin= 9.11D-06
+ ErrMax= 9.11D-06  0.00D+00 EMaxC= 1.00D+00 BMatC= 1.90D-09 BMatP= 3.52D-09
+ IDIUse=1 WtCom= 1.00D+00 WtEn= 0.00D+00
+ Coeff-Com:  0.116D+00-0.571D+00-0.759D+00 0.221D+01
+ Coeff:      0.116D+00-0.571D+00-0.759D+00 0.221D+01
+ Gap=     0.096 Goal=   None    Shift=    0.010
+ RMSDP=6.25D-07 MaxDP=1.33D-05 DE=-9.05D-09 OVMax= 4.20D-05
+
+ Cycle   5  Pass 1  IDiag  1:
+ E= -298.685010550081     Delta-E=       -0.000000006057 Rises=F Damp=F
+ DIIS: error= 2.68D-06 at cycle   5 NSaved=   5.
+ NSaved= 5 IEnMin= 5 EnMin= -298.685010550081     IErMin= 5 ErrMin= 2.68D-06
+ ErrMax= 2.68D-06  0.00D+00 EMaxC= 1.00D+00 BMatC= 1.37D-10 BMatP= 1.90D-09
+ IDIUse=1 WtCom= 1.00D+00 WtEn= 0.00D+00
+ Coeff-Com:  0.251D-01-0.703D-01-0.170D+00-0.401D-01 0.126D+01
+ Coeff:      0.251D-01-0.703D-01-0.170D+00-0.401D-01 0.126D+01
+ Gap=     0.096 Goal=   None    Shift=    0.010
+ RMSDP=2.46D-07 MaxDP=5.22D-06 DE=-6.06D-09 OVMax= 1.69D-05
+
+ Cycle   6  Pass 1  IDiag  1:
+ E= -298.685010550708     Delta-E=       -0.000000000627 Rises=F Damp=F
+ DIIS: error= 2.96D-07 at cycle   6 NSaved=   6.
+ NSaved= 6 IEnMin= 6 EnMin= -298.685010550708     IErMin= 6 ErrMin= 2.96D-07
+ ErrMax= 2.96D-07  0.00D+00 EMaxC= 1.00D+00 BMatC= 5.70D-12 BMatP= 1.37D-10
+ IDIUse=1 WtCom= 1.00D+00 WtEn= 0.00D+00
+ Coeff-Com: -0.903D-02 0.562D-01 0.553D-01-0.221D+00 0.949D-01 0.102D+01
+ Coeff:     -0.903D-02 0.562D-01 0.553D-01-0.221D+00 0.949D-01 0.102D+01
+ Gap=     0.096 Goal=   None    Shift=    0.010
+ RMSDP=3.37D-08 MaxDP=6.53D-07 DE=-6.27D-10 OVMax= 2.23D-06
+
+ Cycle   7  Pass 1  IDiag  1:
+ E= -298.685010550721     Delta-E=       -0.000000000013 Rises=F Damp=F
+ DIIS: error= 8.17D-08 at cycle   7 NSaved=   7.
+ NSaved= 7 IEnMin= 7 EnMin= -298.685010550721     IErMin= 7 ErrMin= 8.17D-08
+ ErrMax= 8.17D-08  0.00D+00 EMaxC= 1.00D+00 BMatC= 3.09D-13 BMatP= 5.70D-12
+ IDIUse=1 WtCom= 1.00D+00 WtEn= 0.00D+00
+ Coeff-Com:  0.530D-03-0.336D-02-0.649D-02 0.309D-01-0.416D-01-0.141D+00
+ Coeff-Com:  0.116D+01
+ Coeff:      0.530D-03-0.336D-02-0.649D-02 0.309D-01-0.416D-01-0.141D+00
+ Coeff:      0.116D+01
+ Gap=     0.096 Goal=   None    Shift=    0.010
+ RMSDP=2.65D-09 MaxDP=6.83D-08 DE=-1.25D-11 OVMax= 1.69D-07
+
+ SCF Done:  E(ROHF) =  -298.685010551     A.U. after    7 cycles
+            NFock=  7  Conv=0.26D-08     -V/T= 2.0042
+ <Sx>= 0.0000 <Sy>= 0.0000 <Sz>= 0.0000 <S**2>=-0.0000 S=-0.0000
+ <L.S>= 0.000000000000E+00
+ KE= 2.974311514868D+02 PE=-8.571322932738D+02 EE= 1.865125431076D+02
+ Annihilation of the first spin contaminant:
+ S**2 before annihilation    -0.0000,   after     0.0000
+ Leave Link  502 at Sat Jan 14 22:00:20 2023, MaxMem=   671088640 cpu:               5.0 elap:               0.9
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l801.exe)
+ Windowed orbitals will be sorted by symmetry type.
+ GenMOA:  NOpAll=  8 NOp2=8 NOpUse=  8 JSym2X=1
+ FoFJK:  IHMeth= 1 ICntrl=       0 DoSepK=F KAlg= 0 I1Cent=           0 FoldK=F
+ IRaf=         0 NMat=       1 IRICut=       1 DoRegI=T DoRafI=F ISym2E= 1 IDoP0=0 IntGTp=1.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=         0 IOpCl=  1 I1Cent=           0 NGrid=           0
+         NMat0=    1 NMatS0=      1 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Petite list used in FoFCou.
+ <Sx>= 0.0000 <Sy>= 0.0000 <Sz>= 0.0000 <S**2>=-0.0000 S=-0.0000
+ ExpMin= 2.14D-01 ExpMax= 1.53D+04 ExpMxC= 5.22D+02 IAcc=3 IRadAn=         5 AccDes= 0.00D+00
+ HarFok:  IExCor=  205 AccDes= 0.00D+00 IRadAn=         5 IDoV=-2 UseB2=F ITyADJ=14
+ ICtDFT= 12500011 ScaDFX=  1.000000  1.000000  1.000000  1.000000
+ Largest valence mixing into a core orbital is  1.27D-04
+ Largest core mixing into a valence orbital is  3.20D-05
+ Largest valence mixing into a core orbital is  1.27D-04
+ Largest core mixing into a valence orbital is  3.20D-05
+ Range of M.O.s used for correlation:     5   120
+ NBasis=   120 NAE=    16 NBE=    16 NFC=     4 NFV=     0
+ NROrb=    116 NOA=    12 NOB=    12 NVA=   104 NVB=   104
+
+ **** Warning!!: The smallest alpha delta epsilon is  0.95983326D-01
+
+
+ **** Warning!!: The smallest beta delta epsilon is  0.95983326D-01
+
+ Singles contribution to E2=   -0.1155762712D-14
+ Leave Link  801 at Sat Jan 14 22:00:21 2023, MaxMem=   671088640 cpu:               1.6 elap:               0.3
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l804.exe)
+ Open-shell transformation, MDV=   671088640 ITran=4 ISComp=2.
+ Unit  1 TFree=        725328 TCopy=        511917.
+ Semi-Direct transformation.
+ ModeAB=           4 MOrb=            12 LenV=     670529670
+ LASXX=      1113002 LTotXX=     1113002 LenRXX=     2273982
+ LTotAB=     1160980 MaxLAS=     4691040 LenRXY=           0
+ NonZer=     3386984 LenScr=     5242880 LnRSAI=     4691040
+ LnScr1=     7340032 LExtra=           0 Total=     19547934
+ MaxDsk=          -1 SrtSym=           T ITran=            4
+ DoSDTr:  NPSUse=  6
+ JobTyp=1 Pass  1:  I=   1 to  12.
+ (rs|ai) integrals will be sorted in core.
+ Complete sort for first half transformation.
+ First half transformation complete.
+ Begin second half transformation for I=  10.
+ Complete sort for second half transformation.
+ Second half transformation complete.
+ ModeAB=           4 MOrb=            12 LenV=     670529670
+ LASXX=      1113002 LTotXX=     1113002 LenRXX=     2043776
+ LTotAB=      930774 MaxLAS=     4691040 LenRXY=           0
+ NonZer=     3156778 LenScr=     5242880 LnRSAI=     4691040
+ LnScr1=     7340032 LExtra=           0 Total=     19317728
+ MaxDsk=          -1 SrtSym=           T ITran=            4
+ DoSDTr:  NPSUse=  6
+ JobTyp=2 Pass  1:  I=   1 to  12.
+ (rs|ai) integrals will be sorted in core.
+ Complete sort for first half transformation.
+ First half transformation complete.
+ Begin second half transformation for I=  10.
+ Complete sort for second half transformation.
+ Second half transformation complete.
+ Spin components of T(2) and E(2):
+     alpha-alpha T2 =       0.1250600410D+01 E2=     -0.4069055765D+00
+     alpha-beta  T2 =       0.6113893899D+01 E2=     -0.2004578984D+01
+     beta-beta   T2 =       0.1250600410D+01 E2=     -0.4069055765D+00
+ ANorm=    0.3100821620D+01
+ E2 =    -0.2818390137D+01 EUMP2 =    -0.30150340068796D+03
+ (S**2,0)=  0.00000D+00           (S**2,1)=  0.00000D+00
+ E(PUHF)=      -0.29868501055D+03        E(PMP2)=      -0.30150340069D+03
+ Leave Link  804 at Sat Jan 14 22:00:23 2023, MaxMem=   671088640 cpu:              12.5 elap:               2.1
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l913.exe)
+ CIDS:  MDV=   671088640.
+ Frozen-core window:  NFC=   4 NFV=   0.
+ IFCWin=0 IBDFC=1 NFBD=     0     0 NFCmp=     0     0 NFFFC=     0     0
+ Using original routines for 1st iteration.
+ Using DD4UQ or CC4UQ for 2nd and later iterations.
+ Keep R2 and R3 ints in memory in symmetry-blocked form, NReq=29781417.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=           0 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=       600 IOpCl=  0 I1Cent=           0 NGrid=           0
+         NMat0=    1 NMatS0=   7260 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Petite list used in FoFCou.
+ CIDS: In Core Option IDoMem=           1.
+ CCSD(T)
+ =======
+ Iterations=  50 Convergence= 0.100D-06
+ Produce multiple copies of IABC intergrals
+ Iteration Nr.   1
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ MP4(R+Q)=  0.29907957D+01
+ Maximum subspace dimension=  5
+ A-vector RMS=  3.3776924D-02 Max=  7.5463394D+00 conv= 1.00D-05.
+ RLE energy=       -0.6291135705
+ E3=        0.68170288D+01        EROMP3=      -0.29468637190D+03
+ E4(SDQ)=  -0.16668429D+02        ROMP4(SDQ)=  -0.31135480072D+03
+ VARIATIONAL ENERGIES WITH THE FIRST-ORDER WAVEFUNCTION:
+ DE(Corr)=   6.9894344     E(Corr)=     -291.69557620    
+ NORM(A)=   0.15562547D+01
+ Iteration Nr.   2
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.8370539D-02 Max=  2.8568917D+00 conv= 1.00D-05.
+ RLE energy=       -1.1802255497
+ DE(Corr)=  -4.3960605     E(CORR)=     -303.08107108     Delta=-1.14D+01
+ NORM(A)=   0.12363902D+01
+ Iteration Nr.   3
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  8.0359031D-03 Max=  5.7166612D-01 conv= 1.00D-05.
+ RLE energy=       -1.1649204791
+ DE(Corr)=  -1.5769667     E(CORR)=     -300.26197725     Delta= 2.82D+00
+ NORM(A)=   0.11720622D+01
+ Iteration Nr.   4
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  3.3012937D-03 Max=  4.0930183D-01 conv= 1.00D-05.
+ RLE energy=       -1.2043056236
+ DE(Corr)=  -1.5243013     E(CORR)=     -300.20931189     Delta= 5.27D-02
+ NORM(A)=   0.11858739D+01
+ Iteration Nr.   5
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  8.6477120D-03 Max=  1.7640356D-01 conv= 1.00D-05.
+ RLE energy=       -1.2147581338
+ DE(Corr)=  -1.2961043     E(CORR)=     -299.98111488     Delta= 2.28D-01
+ NORM(A)=   0.12033315D+01
+ Iteration Nr.   6
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  6.6349758D-03 Max=  1.8556684D-01 conv= 1.00D-05.
+ RLE energy=       -1.2639142114
+ DE(Corr)=  -1.3423928     E(CORR)=     -300.02740339     Delta=-4.63D-02
+ NORM(A)=   0.13631231D+01
+ Iteration Nr.   7
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  3.3550110D-03 Max=  1.7753871D-01 conv= 1.00D-05.
+ RLE energy=       -1.3671512341
+ DE(Corr)=  -1.4577717     E(CORR)=     -300.14278220     Delta=-1.15D-01
+ NORM(A)=   0.14899882D+01
+ Iteration Nr.   8
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  2.6245397D-03 Max=  5.8405892D-01 conv= 1.00D-05.
+ RLE energy=       -1.2341975069
+ DE(Corr)= -0.73359307     E(CORR)=     -299.41860363     Delta= 7.24D-01
+ NORM(A)=   0.13017295D+01
+ Iteration Nr.   9
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  7.7842033D-04 Max=  1.7779363D-01 conv= 1.00D-05.
+ RLE energy=       -1.2688085047
+ DE(Corr)=  -1.4174715     E(CORR)=     -300.10248209     Delta=-6.84D-01
+ NORM(A)=   0.13534804D+01
+ Iteration Nr.  10
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.8264495D-04 Max=  3.0509777D-02 conv= 1.00D-05.
+ RLE energy=       -1.2708946606
+ DE(Corr)=  -1.2980461     E(CORR)=     -299.98305662     Delta= 1.19D-01
+ NORM(A)=   0.13730052D+01
+ Iteration Nr.  11
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  7.8240083D-04 Max=  4.1277684D-02 conv= 1.00D-05.
+ RLE energy=       -1.2768116627
+ DE(Corr)=  -1.3214438     E(CORR)=     -300.00645433     Delta=-2.34D-02
+ NORM(A)=   0.13725711D+01
+ Iteration Nr.  12
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  8.7356966D-04 Max=  1.0334200D-02 conv= 1.00D-05.
+ RLE energy=       -1.2780538756
+ DE(Corr)=  -1.2645533     E(CORR)=     -299.94956386     Delta= 5.69D-02
+ NORM(A)=   0.13760505D+01
+ Iteration Nr.  13
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  2.0729090D-04 Max=  1.0496807D-02 conv= 1.00D-05.
+ RLE energy=       -1.2756967470
+ DE(Corr)=  -1.2649674     E(CORR)=     -299.94997792     Delta=-4.14D-04
+ NORM(A)=   0.13748171D+01
+ Iteration Nr.  14
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  3.1959061D-05 Max=  6.0250855D-03 conv= 1.00D-05.
+ RLE energy=       -1.2770637575
+ DE(Corr)=  -1.2829990     E(CORR)=     -299.96800955     Delta=-1.80D-02
+ NORM(A)=   0.13763103D+01
+ Iteration Nr.  15
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.3713237D-05 Max=  1.9357597D-03 conv= 1.00D-05.
+ RLE energy=       -1.2766191694
+ DE(Corr)=  -1.2749348     E(CORR)=     -299.95994539     Delta= 8.06D-03
+ NORM(A)=   0.13756370D+01
+ Iteration Nr.  16
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.0053188D-05 Max=  1.7721029D-04 conv= 1.00D-05.
+ RLE energy=       -1.2767317029
+ DE(Corr)=  -1.2766425     E(CORR)=     -299.96165309     Delta=-1.71D-03
+ NORM(A)=   0.13758658D+01
+ Iteration Nr.  17
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  2.9017264D-06 Max=  2.6173917D-04 conv= 1.00D-05.
+ RLE energy=       -1.2766444939
+ DE(Corr)=  -1.2765117     E(CORR)=     -299.96152221     Delta= 1.31D-04
+ NORM(A)=   0.13757595D+01
+ Iteration Nr.  18
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  8.3151683D-06 Max=  2.2590568D-04 conv= 1.00D-05.
+ RLE energy=       -1.2766871816
+ DE(Corr)=  -1.2769167     E(CORR)=     -299.96192727     Delta=-4.05D-04
+ NORM(A)=   0.13757746D+01
+ Iteration Nr.  19
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  7.4276584D-06 Max=  1.2794937D-04 conv= 1.00D-05.
+ RLE energy=       -1.2767168811
+ DE(Corr)=  -1.2765245     E(CORR)=     -299.96153503     Delta= 3.92D-04
+ NORM(A)=   0.13758049D+01
+ Iteration Nr.  20
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  4.2829872D-06 Max=  3.0855101D-04 conv= 1.00D-05.
+ RLE energy=       -1.2766382825
+ DE(Corr)=  -1.2763586     E(CORR)=     -299.96136911     Delta= 1.66D-04
+ NORM(A)=   0.13757395D+01
+ Iteration Nr.  21
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.1142503D-06 Max=  2.1759005D-04 conv= 1.00D-05.
+ RLE energy=       -1.2766745514
+ DE(Corr)=  -1.2769000     E(CORR)=     -299.96191057     Delta=-5.41D-04
+ NORM(A)=   0.13757713D+01
+ Iteration Nr.  22
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.6438958D-07 Max=  1.2136954D-05 conv= 1.00D-05.
+ RLE energy=       -1.2766704300
+ DE(Corr)=  -1.2766683     E(CORR)=     -299.96167888     Delta= 2.32D-04
+ NORM(A)=   0.13757572D+01
+ Iteration Nr.  23
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  3.4696964D-07 Max=  2.2750651D-05 conv= 1.00D-05.
+ RLE energy=       -1.2766719073
+ DE(Corr)=  -1.2766472     E(CORR)=     -299.96165775     Delta= 2.11D-05
+ NORM(A)=   0.13757622D+01
+ Iteration Nr.  24
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  2.8496910D-07 Max=  1.4474009D-05 conv= 1.00D-05.
+ RLE energy=       -1.2766683230
+ DE(Corr)=  -1.2766581     E(CORR)=     -299.96166869     Delta=-1.09D-05
+ NORM(A)=   0.13757584D+01
+ Iteration Nr.  25
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  4.1420776D-07 Max=  9.6382873D-06 conv= 1.00D-05.
+ RLE energy=       -1.2766683022
+ DE(Corr)=  -1.2766808     E(CORR)=     -299.96169133     Delta=-2.26D-05
+ NORM(A)=   0.13757570D+01
+ Iteration Nr.  26
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  2.5390132D-07 Max=  7.1308653D-06 conv= 1.00D-05.
+ RLE energy=       -1.2766710674
+ DE(Corr)=  -1.2766759     E(CORR)=     -299.96168640     Delta= 4.93D-06
+ NORM(A)=   0.13757597D+01
+ Iteration Nr.  27
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  6.1932156D-08 Max=  1.1012784D-05 conv= 1.00D-05.
+ RLE energy=       -1.2766689870
+ DE(Corr)=  -1.2766585     E(CORR)=     -299.96166900     Delta= 1.74D-05
+ NORM(A)=   0.13757574D+01
+ Iteration Nr.  28
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.5866642D-08 Max=  9.6593021D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766692063
+ DE(Corr)=  -1.2766701     E(CORR)=     -299.96168065     Delta=-1.16D-05
+ NORM(A)=   0.13757578D+01
+ Iteration Nr.  29
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.0275034D-08 Max=  1.0234653D-06 conv= 1.00D-05.
+ RLE energy=       -1.2766693000
+ DE(Corr)=  -1.2766702     E(CORR)=     -299.96168077     Delta=-1.21D-07
+ NORM(A)=   0.13757576D+01
+ Iteration Nr.  30
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.5110758D-08 Max=  8.4807855D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766693036
+ DE(Corr)=  -1.2766682     E(CORR)=     -299.96167880     Delta= 1.97D-06
+ NORM(A)=   0.13757576D+01
+ Iteration Nr.  31
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.4242322D-08 Max=  7.3832043D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766695212
+ DE(Corr)=  -1.2766685     E(CORR)=     -299.96167904     Delta=-2.43D-07
+ NORM(A)=   0.13757578D+01
+ Iteration Nr.  32
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  5.4595383D-08 Max=  2.1710913D-06 conv= 1.00D-05.
+ RLE energy=       -1.2766691619
+ DE(Corr)=  -1.2766671     E(CORR)=     -299.96167761     Delta= 1.43D-06
+ NORM(A)=   0.13757575D+01
+ Iteration Nr.  33
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.0963722D-08 Max=  1.3977543D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766691129
+ DE(Corr)=  -1.2766693     E(CORR)=     -299.96167986     Delta=-2.25D-06
+ NORM(A)=   0.13757574D+01
+ Iteration Nr.  34
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.5993270D-08 Max=  4.4642911D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766690926
+ DE(Corr)=  -1.2766696     E(CORR)=     -299.96168015     Delta=-2.90D-07
+ NORM(A)=   0.13757575D+01
+ Iteration Nr.  35
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.0962573D-08 Max=  6.8546187D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766688496
+ DE(Corr)=  -1.2766700     E(CORR)=     -299.96168056     Delta=-4.04D-07
+ NORM(A)=   0.13757572D+01
+ Iteration Nr.  36
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  4.1100533D-08 Max=  2.1471521D-06 conv= 1.00D-05.
+ RLE energy=       -1.2766692717
+ DE(Corr)=  -1.2766713     E(CORR)=     -299.96168189     Delta=-1.33D-06
+ NORM(A)=   0.13757575D+01
+ Iteration Nr.  37
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.0833571D-08 Max=  7.5062146D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766690980
+ DE(Corr)=  -1.2766683     E(CORR)=     -299.96167887     Delta= 3.02D-06
+ NORM(A)=   0.13757574D+01
+ Iteration Nr.  38
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  4.0369946D-09 Max=  5.5194359D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766691648
+ DE(Corr)=  -1.2766697     E(CORR)=     -299.96168026     Delta=-1.39D-06
+ NORM(A)=   0.13757575D+01
+ Iteration Nr.  39
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  3.2042119D-09 Max=  1.3585894D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766688951
+ DE(Corr)=  -1.2766693     E(CORR)=     -299.96167988     Delta= 3.78D-07
+ NORM(A)=   0.13757572D+01
+ Iteration Nr.  40
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  1.4341805D-08 Max=  1.8366632D-06 conv= 1.00D-05.
+ RLE energy=       -1.2766691399
+ DE(Corr)=  -1.2766708     E(CORR)=     -299.96168139     Delta=-1.51D-06
+ NORM(A)=   0.13757574D+01
+ Iteration Nr.  41
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  7.1885710D-09 Max=  2.3593605D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766691420
+ DE(Corr)=  -1.2766694     E(CORR)=     -299.96167990     Delta= 1.49D-06
+ NORM(A)=   0.13757575D+01
+ Iteration Nr.  42
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  4.3760068D-08 Max=  6.0025231D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766694475
+ DE(Corr)=  -1.2766698     E(CORR)=     -299.96168035     Delta=-4.51D-07
+ NORM(A)=   0.13757586D+01
+ Iteration Nr.  43
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  7.1370086D-07 Max=  8.3774353D-06 conv= 1.00D-05.
+ RLE energy=       -1.2766696000
+ DE(Corr)=  -1.2766719     E(CORR)=     -299.96168241     Delta=-2.05D-06
+ NORM(A)=   0.13757577D+01
+ Iteration Nr.  44
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  2.2164474D-08 Max=  2.8540098D-06 conv= 1.00D-05.
+ RLE energy=       -1.2766692248
+ DE(Corr)=  -1.2766661     E(CORR)=     -299.96167666     Delta= 5.75D-06
+ NORM(A)=   0.13757575D+01
+ Iteration Nr.  45
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  3.0157670D-09 Max=  3.0002796D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766692359
+ DE(Corr)=  -1.2766688     E(CORR)=     -299.96167940     Delta=-2.74D-06
+ NORM(A)=   0.13757575D+01
+ Iteration Nr.  46
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   144 NAA=    66 NBB=    66.
+ A-vector RMS=  4.0715791D-09 Max=  3.7962176D-07 conv= 1.00D-05.
+ RLE energy=       -1.2766692280
+ DE(Corr)=  -1.2766688     E(CORR)=     -299.96167931     Delta= 9.26D-08
+ NORM(A)=   0.13757575D+01
+ CI/CC converged in   46 iterations to DelEn= 9.26D-08 Conv= 1.00D-07 ErrA1= 4.07D-09 Conv= 1.00D-05
+ Wavefunction amplitudes converged. E(Corr)=     -299.96167931    
+ Dominant configurations:
+ ***********************
+ Spin Case        I    J    A    B          Value
+   ABAB          16   16   17   17      -0.460630D+00
+   ABAB          15   15   18   18      -0.460630D+00
+   ABAB          16   15   18   17      -0.223246D+00
+   ABAB          16   15   17   18      -0.179781D+00
+   ABAB          15   16   18   17      -0.179781D+00
+   ABAB          15   16   17   18      -0.223246D+00
+ Largest amplitude= 4.61D-01
+ Time for triples=      389.76 seconds.
+ T4(CCSD)= -0.32522615D+00
+ T5(CCSD)=  0.80775274D-02
+ CCSD(T)= -0.30027882793D+03
+ Discarding MO integrals.
+ Leave Link  913 at Sat Jan 14 22:02:29 2023, MaxMem=   671088640 cpu:             730.8 elap:             126.1
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l601.exe)
+ Copying SCF densities to generalized density rwf, IOpCl= 0 IROHF=1.
+
+ **********************************************************************
+
+            Population analysis using the SCF density.
+
+ **********************************************************************
+
+ Orbital symmetries:
+       Occupied  (SGG) (SGU) (SGG) (SGU) (SGG) (SGU) (SGG) (SGU)
+                 (SGG) (SGU) (PIU) (PIU) (PIG) (PIG) (PIU) (PIU)
+       Virtual   (PIG) (PIG) (SGG) (SGU) (SGG) (SGU) (PIU) (PIU)
+                 (PIG) (PIG) (SGG) (SGU) (PIU) (PIU) (PIG) (PIG)
+                 (SGU) (SGG) (SGG) (SGU) (PIU) (PIU) (PIG) (PIG)
+                 (DLTG) (DLTG) (DLTU) (DLTU) (DLTG) (DLTG) (DLTU)
+                 (DLTU) (SGG) (SGU) (PIU) (PIU) (PIG) (PIG) (SGG)
+                 (SGU) (PIU) (PIU) (PIG) (PIG) (SGG) (SGU) (PIU)
+                 (PIU) (PIG) (PIG) (SGG) (SGU) (PIU) (PIU) (PIG)
+                 (PIG) (DLTG) (DLTG) (DLTU) (DLTU) (SGG) (SGU)
+                 (PHIU) (PHIU) (PHIG) (PHIG) (PHIU) (PHIU) (PHIG)
+                 (PHIG) (DLTG) (DLTG) (DLTU) (DLTU) (PIU) (PIU)
+                 (PIG) (PIG) (DLTG) (DLTG) (DLTU) (DLTU) (DLTG)
+                 (DLTG) (DLTU) (DLTU) (PIU) (PIU) (PIG) (PIG) (SGG)
+                 (SGU) (SGG) (SGU) (SGG) (SGU) (PIU) (PIU) (PIG)
+                 (PIG) (SGG) (SGU) (SGG) (SGU)
+ The electronic state is 1-SGG.
+ Alpha  occ. eigenvalues --  -20.79569 -20.79568 -20.78166 -20.78166  -1.55935
+ Alpha  occ. eigenvalues --   -1.55923  -1.16245  -1.16146  -0.70986  -0.70910
+ Alpha  occ. eigenvalues --   -0.66898  -0.66898  -0.66591  -0.66591  -0.32605
+ Alpha  occ. eigenvalues --   -0.32605
+ Alpha virt. eigenvalues --   -0.23006  -0.23006   0.25564   0.26807   0.64853
+ Alpha virt. eigenvalues --    0.69745   0.71575   0.71575   0.71711   0.71711
+ Alpha virt. eigenvalues --    0.74350   0.77211   0.81759   0.81759   0.82106
+ Alpha virt. eigenvalues --    0.82106   0.88830   0.88841   1.41185   1.44438
+ Alpha virt. eigenvalues --    1.47874   1.47874   1.47991   1.47991   1.50336
+ Alpha virt. eigenvalues --    1.50336   1.50347   1.50347   1.83807   1.83807
+ Alpha virt. eigenvalues --    1.83867   1.83867   2.20079   2.20753   2.35974
+ Alpha virt. eigenvalues --    2.35974   2.36060   2.36060   2.45343   2.52700
+ Alpha virt. eigenvalues --    3.86236   3.86236   3.86314   3.86314   3.93111
+ Alpha virt. eigenvalues --    3.94984   4.09736   4.09736   4.09907   4.09907
+ Alpha virt. eigenvalues --    4.94748   4.94817   5.02675   5.02675   5.02686
+ Alpha virt. eigenvalues --    5.02686   5.10281   5.10281   5.10284   5.10284
+ Alpha virt. eigenvalues --    5.15747   5.15833   5.39395   5.39395   5.39395
+ Alpha virt. eigenvalues --    5.39395   5.51576   5.51576   5.51577   5.51577
+ Alpha virt. eigenvalues --    5.84840   5.84840   5.84841   5.84841   6.45678
+ Alpha virt. eigenvalues --    6.45678   6.45685   6.45685   6.52059   6.52059
+ Alpha virt. eigenvalues --    6.52059   6.52059   6.69892   6.69892   6.69892
+ Alpha virt. eigenvalues --    6.69892   6.71355   6.71355   6.71355   6.71355
+ Alpha virt. eigenvalues --    6.72688   6.73317   6.92654   7.00647   7.19164
+ Alpha virt. eigenvalues --    7.19568   7.35710   7.35710   7.35742   7.35742
+ Alpha virt. eigenvalues --    8.04613   8.04690  10.34459  10.34478
+          Condensed to atoms (all electrons):
+               1          2          3          4
+     1  O    7.822198   0.162312  -0.000001   0.000204
+     2  O    0.162312   7.852976   0.000000  -0.000001
+     3  O   -0.000001   0.000000   7.852976   0.162312
+     4  O    0.000204  -0.000001   0.162312   7.822198
+          Atomic-Atomic Spin Densities.
+               1          2          3          4
+     1  O    0.000000   0.000000  -0.000000   0.000000
+     2  O    0.000000   0.000000   0.000000  -0.000000
+     3  O   -0.000000   0.000000   0.000000   0.000000
+     4  O    0.000000  -0.000000   0.000000   0.000000
+ Mulliken charges and spin densities:
+               1          2
+     1  O    0.015287   0.000000
+     2  O   -0.015287   0.000000
+     3  O   -0.015287   0.000000
+     4  O    0.015287   0.000000
+ Sum of Mulliken charges =  -0.00000   0.00000
+ Mulliken charges and spin densities with hydrogens summed into heavy atoms:
+               1          2
+     1  O    0.015287   0.000000
+     2  O   -0.015287   0.000000
+     3  O   -0.015287   0.000000
+     4  O    0.015287   0.000000
+ Electronic spatial extent (au):  <R**2>=           1031.4312
+ Charge=             -0.0000 electrons
+ Dipole moment (field-independent basis, Debye):
+    X=             -0.0000    Y=              0.0000    Z=             -0.0000  Tot=              0.0000
+ Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=            -20.7418   YY=            -20.7418   ZZ=            -21.5688
+   XY=              0.0000   XZ=              0.0000   YZ=              0.0000
+ Traceless Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=              0.2757   YY=              0.2757   ZZ=             -0.5514
+   XY=              0.0000   XZ=              0.0000   YZ=              0.0000
+ Octapole moment (field-independent basis, Debye-Ang**2):
+  XXX=             -0.0000  YYY=             -0.0000  ZZZ=              0.0000  XYY=             -0.0000
+  XXY=             -0.0000  XXZ=              0.0000  XZZ=             -0.0000  YZZ=              0.0000
+  YYZ=             -0.0000  XYZ=             -0.0000
+ Hexadecapole moment (field-independent basis, Debye-Ang**3):
+ XXXX=            -14.9294 YYYY=            -14.9294 ZZZZ=          -1091.9691 XXXY=              0.0000
+ XXXZ=              0.0000 YYYX=              0.0000 YYYZ=              0.0000 ZZZX=              0.0000
+ ZZZY=              0.0000 XXYY=             -4.9765 XXZZ=           -184.1968 YYZZ=           -184.1968
+ XXYZ=              0.0000 YYXZ=              0.0000 ZZXY=             -0.0000
+ N-N= 7.450358812861D+01 E-N=-8.571322930072D+02  KE= 2.974311514868D+02
+ Symmetry AG   KE= 1.344238008936D+02
+ Symmetry B1G  KE= 1.064276409924D-33
+ Symmetry B2G  KE= 4.410783111558D+00
+ Symmetry B3G  KE= 4.410783111558D+00
+ Symmetry AU   KE= 1.071705171973D-33
+ Symmetry B1U  KE= 1.344436308343D+02
+ Symmetry B2U  KE= 9.871076767899D+00
+ Symmetry B3U  KE= 9.871076767899D+00
+ Symmetry AG   SP= 2.377285476573D-15
+ Symmetry B1G  SP= 6.799227660549D-50
+ Symmetry B2G  SP= 4.931251454859D-16
+ Symmetry B3G  SP= 4.630624748526D-16
+ Symmetry AU   SP= 6.907156625615D-50
+ Symmetry B1U  SP= 2.376615858293D-15
+ Symmetry B2U  SP= 8.824310587896D-16
+ Symmetry B3U  SP= 9.602562754314D-16
+                          Isotropic Fermi Contact Couplings
+        Atom                 a.u.       MegaHertz       Gauss      10(-4) cm-1
+     1  O(17)              0.00000      -0.00000      -0.00000      -0.00000
+     2  O(17)              0.00000      -0.00000      -0.00000      -0.00000
+     3  O(17)              0.00000      -0.00000      -0.00000      -0.00000
+     4  O(17)              0.00000      -0.00000      -0.00000      -0.00000
+ --------------------------------------------------------
+       Center         ----  Spin Dipole Couplings  ----
+                      3XX-RR        3YY-RR        3ZZ-RR
+ --------------------------------------------------------
+     1   Atom        0.000000      0.000000      0.000000
+     2   Atom        0.000000      0.000000      0.000000
+     3   Atom        0.000000      0.000000      0.000000
+     4   Atom        0.000000      0.000000      0.000000
+ --------------------------------------------------------
+                        XY            XZ            YZ
+ --------------------------------------------------------
+     1   Atom        0.000000      0.000000      0.000000
+     2   Atom        0.000000      0.000000      0.000000
+     3   Atom        0.000000      0.000000      0.000000
+     4   Atom        0.000000      0.000000      0.000000
+ --------------------------------------------------------
+
+
+ ---------------------------------------------------------------------------------
+              Anisotropic Spin Dipole Couplings in Principal Axis System
+ ---------------------------------------------------------------------------------
+
+       Atom             a.u.   MegaHertz   Gauss  10(-4) cm-1        Axes
+
+              Baa     0.0000    -0.000    -0.000    -0.000  1.0000  0.0000  0.0000
+     1 O(17)  Bbb     0.0000    -0.000    -0.000    -0.000 -0.0000  1.0000  0.0000
+              Bcc     0.0000    -0.000    -0.000    -0.000  0.0000  0.0000  1.0000
+ 
+              Baa     0.0000    -0.000    -0.000    -0.000  1.0000  0.0000  0.0000
+     2 O(17)  Bbb     0.0000    -0.000    -0.000    -0.000 -0.0000  1.0000  0.0000
+              Bcc     0.0000    -0.000    -0.000    -0.000  0.0000  0.0000  1.0000
+ 
+              Baa     0.0000    -0.000    -0.000    -0.000  1.0000  0.0000  0.0000
+     3 O(17)  Bbb     0.0000    -0.000    -0.000    -0.000 -0.0000  1.0000  0.0000
+              Bcc     0.0000    -0.000    -0.000    -0.000  0.0000  0.0000  1.0000
+ 
+              Baa     0.0000    -0.000    -0.000    -0.000  1.0000  0.0000  0.0000
+     4 O(17)  Bbb     0.0000    -0.000    -0.000    -0.000 -0.0000  1.0000  0.0000
+              Bcc     0.0000    -0.000    -0.000    -0.000  0.0000  0.0000  1.0000
+ 
+
+ ---------------------------------------------------------------------------------
+
+ No NMR shielding tensors so no spin-rotation constants.
+ Leave Link  601 at Sat Jan 14 22:02:29 2023, MaxMem=   671088640 cpu:               0.9 elap:               0.2
+ (Enter /usr/site/hpc/x86_64/glibc-2.17/broadwell/gaussian/g16_a.03/pgi-16.5/g16/l9999.exe)
+ 1\1\GINC-N041\SP\ROCCSD(T)-FC\CC-pVTZ\O4\ROOT\14-Jan-2023\0\\#p ROCCSD
+ (T)/cc-pVTZ Guess=Read SCF=(VeryTight,CDIIS,VShift=10)\\O2_O2_98\\0,1\
+ O,0,0.67619,0.,0.\O,0,-0.67619,0.,0.\O,0,6.388803,0.,0.\O,0,5.036423,0
+ .,0.\\Version=ES64L-G16RevA.03\State=1-SGG\HF=-298.6850106\MP2=-301.50
+ 34007\MP3=-294.6863719\PUHF=-298.6850106\PMP2-0=-301.5034007\MP4SDQ=-3
+ 11.3548007\CCSD=-299.9616793\CCSD(T)=-300.2788279\RMSD=2.646e-09\PG=D*
+ H [C*(O1O1.O1O1)]\\@
+
+
+ ONE OF THE BENEFITS OF A COLLEGE EDUCATION
+ IS TO SHOW THE BOY ITS LITTLE AVAIL 
+                                    EMERSON IN 'CULTURE'
+ Job cpu time:       0 days  0 hours 12 minutes 53.6 seconds.
+ Elapsed time:       0 days  0 hours  2 minutes 19.5 seconds.
+ File lengths (MBytes):  RWF=    508 Int=      0 D2E=      0 Chk=      8 Scr=      8
+ Normal termination of Gaussian 16 at Sat Jan 14 22:02:29 2023.
