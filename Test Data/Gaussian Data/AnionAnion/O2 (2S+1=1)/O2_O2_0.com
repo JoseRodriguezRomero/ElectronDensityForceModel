@@ -1,8 +1,8 @@
-%NProcShared=6
-%Mem=5GB
+%NProcShared=4
+%Mem=4GB
 %Chk=O2_O2_0.chk
 
-#p ROCCSD(T)/cc-pVTZ SCF=(VeryTight,CDIIS,VShift=10) 
+#p CCSD(T)/cc-pVTZ SCF=XQC 
 
 O2_O2_0
 

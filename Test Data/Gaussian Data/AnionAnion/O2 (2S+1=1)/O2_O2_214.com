@@ -1,9 +1,9 @@
-%NProcShared=6
-%Mem=5GB
+%NProcShared=4
+%Mem=4GB
 %OldChk=O2_O2_213.chk
 %Chk=O2_O2_214.chk
 
-#p ROCCSD(T)/cc-pVTZ Guess=Read SCF=(VeryTight,CDIIS,VShift=10) 
+#p CCSD(T)/cc-pVTZ Guess=Read SCF=XQC 
 
 O2_O2_214
 
