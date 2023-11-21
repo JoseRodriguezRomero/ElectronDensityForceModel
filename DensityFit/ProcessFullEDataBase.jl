@@ -225,7 +225,7 @@ function Foo2(vars::Vector{Float64})
             aux_sum += c*((λ/π)^1.5)*exp(-λ*(di^2.0));
         end
 
-        sum1 += (di^5)*((ρi-aux_sum)^2);
+        sum1 += (di^4)*((ρi-aux_sum)^2);
     end
 
     sum2 = 0;
@@ -258,7 +258,7 @@ function Goo2!(grad::Vector{Float64},vars::Vector{Float64})
             λ = abs(vars[ii]);
 
             aux_mult = ((λ/π)^1.5)*exp(-λ*(di^2.0));
-            sum1 -= 2.0*(di^5)*(ρi-aux_sum)*aux_mult;
+            sum1 -= 2.0*(di^4)*(ρi-aux_sum)*aux_mult;
         end
 
         sum2 = 0;
@@ -289,12 +289,47 @@ function Goo2!(grad::Vector{Float64},vars::Vector{Float64})
             c = vars[9+ii];
 
             aux_mult = c*((λ/π)^1.5)*exp(-λ*di)*((1.5/λ)-di);
-            sum1 -= 2.0*(di^2.5)*(ρi-aux_sum)*aux_mult;
+            sum1 -= 2.0*(di^2)*(ρi-aux_sum)*aux_mult;
         end
 
         grad[ii] += sum1/num_pts;
     end
 end
+
+function GetECPCoeffs()
+    # Returns all the coeffients in a convenient matrix form
+    coeffs = zeros(Float64,0,6);
+    fileID = open("AtomsCoeffs_ECP.txt","r");
+
+    readline(fileID);
+
+    aux_i = 0;
+    atom_z = 0;
+    for line in readlines(fileID)
+        line_splitted = split(line);
+
+        if length(line_splitted) > 6
+            aux_i = 1;
+            atom_z = parse(Int,line_splitted[2]);
+            coeffs = [coeffs; zeros(Float64,1,6)];
+
+            for i in 1:6
+                coeffs[end,6*(aux_i-1)+i] = parse(Float64,line_splitted[i+3]);
+            end
+        else
+            aux_i += 1;
+
+            for i in 1:6
+                coeffs[end,6*(aux_i-1)+i] = parse(Float64,line_splitted[i]);
+            end
+        end
+    end
+
+    close(fileID);
+    return coeffs;
+end
+
+ECPCoeffs = GetECPCoeffs();
 
 # rm("AtomsData.txt");
 fileID = open("AtomsData.txt","w");
@@ -308,7 +343,7 @@ for i in 1:3
 end
 @printf fileID "\n";
 
-for i in 18:18
+for i in 2:2
     @printf fileID "%10s " AtomicNumberElement(i);
     cub_x = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(i)*"_X.cub");
     cub_y = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(i)*"_Y.cub");
@@ -322,25 +357,29 @@ for i in 18:18
     global atomic_number = charges[2];
 
     init_val = rand(Float64,18);
-    init_val[10] = -1028.8024503460;
-    init_val[11] = -278.1120656326;
-    init_val[12] = 0.8202583595;
-    init_val[13] = -216.9539852535;
-    init_val[14] = 737.1769460388;
-    init_val[15] = 0.1060239653;
-    init_val[16] = 281.5008920699;
-    init_val[17] = 513.3882512929;
-    init_val[18] = 0.8760960396;
+    init_val[1:9] .*= 200.0;
+    init_val[1:3] = ECPCoeffs[i,2:2:end];
+    init_val[10:12] = ECPCoeffs[i,1:2:end];
 
-    init_val[1] = 0.7888380083;
-    init_val[2] = 3.2665711251;
-    init_val[3] = 123.1102354892;
-    init_val[4] = 0.8140238235;
-    init_val[5] = 0.8140549670;
-    init_val[6] = 2459.8363538952;
-    init_val[7] = 3.2665695392;
-    init_val[8] = 0.7655604755;
-    init_val[9] = 38.8674670258;
+    # init_val[10] = -1028.8024503460;
+    # init_val[11] = -278.1120656326;
+    # init_val[12] = 0.8202583595;
+    # init_val[13] = -216.9539852535;
+    # init_val[14] = 737.1769460388;
+    # init_val[15] = 0.1060239653;
+    # init_val[16] = 281.5008920699;
+    # init_val[17] = 513.3882512929;
+    # init_val[18] = 0.8760960396;
+
+    # init_val[1] = 0.7888380083;
+    # init_val[2] = 3.2665711251;
+    # init_val[3] = 123.1102354892;
+    # init_val[4] = 0.8140238235;
+    # init_val[5] = 0.8140549670;
+    # init_val[6] = 2459.8363538952;
+    # init_val[7] = 3.2665695392;
+    # init_val[8] = 0.7655604755;
+    # init_val[9] = 38.8674670258;
 
     # init_val[10:18] .*= 4.0;
 

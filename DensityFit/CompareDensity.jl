@@ -297,19 +297,84 @@ function Goo2!(grad::Vector{Float64},vars::Vector{Float64})
     end
 end
 
-cub_x = ReadCubeFile("data_base/"*AtomicNumberElement(2)*"_X.cub");
-cub_y = ReadCubeFile("data_base/"*AtomicNumberElement(2)*"_Y.cub");
-cub_z = ReadCubeFile("data_base/"*AtomicNumberElement(2)*"_Z.cub");
+function GetECPCoeffs()
+    # Returns all the coeffients in a convenient matrix form
+    coeffs = zeros(Float64,0,6);
+    fileID = open("AtomsCoeffs_ECP.txt","r");
+
+    readline(fileID);
+
+    aux_i = 0;
+    atom_z = 0;
+    for line in readlines(fileID)
+        line_splitted = split(line);
+
+        if length(line_splitted) > 6
+            aux_i = 1;
+            atom_z = parse(Int,line_splitted[2]);
+            coeffs = [coeffs; zeros(Float64,1,6)];
+
+            for i in 1:6
+                coeffs[end,6*(aux_i-1)+i] = parse(Float64,line_splitted[i+3]);
+            end
+        else
+            aux_i += 1;
+
+            for i in 1:6
+                coeffs[end,6*(aux_i-1)+i] = parse(Float64,line_splitted[i]);
+            end
+        end
+    end
+
+    close(fileID);
+    return coeffs;
+end
+
+function GetFullECoeffs()
+    # Returns all the coeffients in a convenient matrix form
+    coeffs = zeros(Float64,0,18);
+    fileID = open("AtomsCoeffs_FullE.txt","r");
+
+    readline(fileID);
+
+    aux_i = 0;
+    atom_z = 0;
+    for line in readlines(fileID)
+        line_splitted = split(line);
+
+        if length(line_splitted) > 6
+            aux_i = 1;
+            atom_z = parse(Int,line_splitted[2]);
+            coeffs = [coeffs; zeros(Float64,1,18)];
+
+            for i in 1:6
+                coeffs[end,6*(aux_i-1)+i] = parse(Float64,line_splitted[i+3]);
+            end
+        else
+            aux_i += 1;
+
+            for i in 1:6
+                coeffs[end,6*(aux_i-1)+i] = parse(Float64,line_splitted[i]);
+            end
+        end
+    end
+
+    close(fileID);
+    return coeffs;
+end 
+
+ECPCoeffs = GetECPCoeffs();
+FullECoeffs = GetFullECoeffs();
+
+cub_x = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(2)*"_X.cub");
+cub_y = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(2)*"_Y.cub");
+cub_z = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(2)*"_Z.cub");
 cub_data = (cub_x + cub_y + cub_z)./3.0;
 
+# ECP Fit
 vars = zeros(Float64,6,1);
-vars[1] = 0.1154965782;
-vars[2] = -7.4980066326;
-vars[3] = 9.3822136528;
-
-vars[4] = 20.7960680562;
-vars[5] = 1.8649595111;
-vars[6] = 1.8649595136;
+vars[1:3] = ECPCoeffs[2,1:2:end];
+vars[4:6] = ECPCoeffs[2,2:2:end];
 
 plt_1 = 0.0 .* cub_data[:,1];
 for i in 1:3
@@ -318,32 +383,41 @@ for i in 1:3
     global plt_1 += cc*((λ/π)^1.5)*exp.(-λ.*(cub_data[:,1].^2.0));
 end
 
+# Full E. Fit
+vars = zeros(Float64,18,1);
+vars[1:9] = FullECoeffs[2,1:2:end];
+vars[10:18] = FullECoeffs[2,2:2:end];
+
+plt_2 = 0.0 .* cub_data[:,1];
+for i in 1:9
+    λ = abs(vars[9+i]);
+    cc = vars[i];
+    global plt_2 += cc*((λ/π)^1.5)*exp.(-λ.*(cub_data[:,1].^2.0));
+end
+
 p1 = plot(cub_data[:,1],cub_data[:,2],linewidth=2);
 plot!(cub_data[:,1],plt_1,linestyle=:dash,linewidth=4);
+plot!(cub_data[:,1],plt_2,linestyle=:dash,linewidth=4);
 plot!(xlims=(0,1.5));
-plot!(ylims=(0,3));
+plot!(ylims=(0,4));
 plot!(legend=false);
 
 plot!(ylabel=L"\rho \left( r \right)");
 plot!(xlabel=L"r");
 plot!(bottom_margin=1.75Plots.mm);
 plot!(left_margin=2.5Plots.mm);
-annotate!(1.5*0.975,3.0*0.975,text("He",:right,:top,10));
+annotate!(1.5*0.975,4.0*0.975,text("He",:right,:top,10));
 
 
-cub_x = ReadCubeFile("data_base/"*AtomicNumberElement(3)*"_X.cub");
-cub_y = ReadCubeFile("data_base/"*AtomicNumberElement(3)*"_Y.cub");
-cub_z = ReadCubeFile("data_base/"*AtomicNumberElement(3)*"_Z.cub");
+cub_x = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(3)*"_X.cub");
+cub_y = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(3)*"_Y.cub");
+cub_z = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(3)*"_Z.cub");
 cub_data = (cub_x + cub_y + cub_z)./3.0;
 
+# ECP Fit
 vars = zeros(Float64,6,1);
-vars[1] = 1.0742154658;
-vars[2] = 1.6710452453;
-vars[3] = -1.7452607228;
-
-vars[4] = 0.0995837849;
-vars[5] = 1.0335545866;
-vars[6] = 1.0167791686;
+vars[1:3] = ECPCoeffs[3,1:2:end];
+vars[4:6] = ECPCoeffs[3,2:2:end];
 
 plt_1 = 0.0 .* cub_data[:,1];
 for i in 1:3
@@ -352,21 +426,126 @@ for i in 1:3
     global plt_1 += cc*((λ/π)^1.5)*exp.(-λ.*(cub_data[:,1].^2.0));
 end
 
+# Full E. Fit
+vars = zeros(Float64,18,1);
+vars[1:9] = FullECoeffs[3,1:2:end];
+vars[10:18] = FullECoeffs[3,2:2:end];
+
+plt_2 = 0.0 .* cub_data[:,1];
+for i in 1:9
+    λ = abs(vars[9+i]);
+    cc = vars[i];
+    global plt_2 += cc*((λ/π)^1.5)*exp.(-λ.*(cub_data[:,1].^2.0));
+end
+
 p2 = plot(cub_data[:,1],cub_data[:,2],linewidth=2);
 plot!(cub_data[:,1],plt_1,linestyle=:dash,linewidth=4);
+plot!(cub_data[:,1],plt_2,linestyle=:dash,linewidth=4);
 plot!(xlims=(0,7.5));
-plot!(ylims=(0,0.004));
+plot!(ylims=(0,0.01));
 plot!(xlabel=L"r");
-annotate!(7.5*0.975,0.004*0.975,text("Li",:right,:top,10));
+annotate!(7.5*0.975,0.01*0.975,text("Li",:right,:top,10));
 
 plot!(legend = false);
 
 p12 = plot(p1,p2,layout=(1,2));
 plot!(size=(550,150));
 
-p3 = plot([1,2]',label=["GD3-B3LYP/CEP-31G" "Gaussian Approximation"],
+p3 = plot([1,2]',label=["GD3-B3LYP/CEP-31G",
+    "Gaussian Approximation (ECP Fitted)",
+    "Gaussian Approximation (Full E. Fitted)"],
     linewidth=[2,4]',
     linestyle=[:solid :dash]);
 plot!(legend=:top,legendcolumns=1, framestyle=:none);
 
-plot(p3,p12,size=[550, 250],layout=grid(2, 1, heights=[0.2 ,0.8]))
+cub_x = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(8)*"_X.cub");
+cub_y = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(8)*"_Y.cub");
+cub_z = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(8)*"_Z.cub");
+cub_data = (cub_x + cub_y + cub_z)./3.0;
+
+# ECP Fit
+vars = zeros(Float64,6,1);
+vars[1:3] = ECPCoeffs[8,1:2:end];
+vars[4:6] = ECPCoeffs[8,2:2:end];
+
+plt_1 = 0.0 .* cub_data[:,1];
+for i in 1:3
+    λ = abs(vars[3+i]);
+    cc = vars[i];
+    global plt_1 += cc*((λ/π)^1.5)*exp.(-λ.*(cub_data[:,1].^2.0));
+end
+
+# Full E. Fit
+vars = zeros(Float64,18,1);
+vars[1:9] = FullECoeffs[8,1:2:end];
+vars[10:18] = FullECoeffs[8,2:2:end];
+
+plt_2 = 0.0 .* cub_data[:,1];
+for i in 1:9
+    λ = abs(vars[9+i]);
+    cc = vars[i];
+    global plt_2 += cc*((λ/π)^1.5)*exp.(-λ.*(cub_data[:,1].^2.0));
+end
+
+p3 = plot(cub_data[:,1],cub_data[:,2],linewidth=2);
+plot!(cub_data[:,1],plt_1,linestyle=:dash,linewidth=4);
+plot!(cub_data[:,1],plt_2,linestyle=:dash,linewidth=4);
+plot!(xlims=(0,1.5));
+plot!(ylims=(0,4));
+plot!(legend=false);
+
+plot!(ylabel=L"\rho \left( r \right)");
+plot!(xlabel=L"r");
+plot!(bottom_margin=1.75Plots.mm);
+plot!(left_margin=2.5Plots.mm);
+annotate!(1.5*0.975,4.0*0.975,text("O",:right,:top,10));
+
+
+cub_x = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(18)*"_X.cub");
+cub_y = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(18)*"_Y.cub");
+cub_z = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(18)*"_Z.cub");
+cub_data = (cub_x + cub_y + cub_z)./3.0;
+
+# ECP Fit
+vars = zeros(Float64,6,1);
+vars[1:3] = ECPCoeffs[18,1:2:end];
+vars[4:6] = ECPCoeffs[18,2:2:end];
+
+plt_1 = 0.0 .* cub_data[:,1];
+for i in 1:3
+    λ = abs(vars[3+i]);
+    cc = vars[i];
+    global plt_1 += cc*((λ/π)^1.5)*exp.(-λ.*(cub_data[:,1].^2.0));
+end
+
+# Full E. Fit
+vars = zeros(Float64,18,1);
+vars[1:9] = FullECoeffs[18,1:2:end];
+vars[10:18] = FullECoeffs[18,2:2:end];
+
+plt_2 = 0.0 .* cub_data[:,1];
+for i in 1:9
+    λ = abs(vars[9+i]);
+    cc = vars[i];
+    global plt_2 += cc*((λ/π)^1.5)*exp.(-λ.*(cub_data[:,1].^2.0));
+end
+
+p4 = plot(cub_data[:,1],cub_data[:,2],linewidth=2);
+plot!(cub_data[:,1],plt_1,linestyle=:dash,linewidth=4);
+plot!(cub_data[:,1],plt_2,linestyle=:dash,linewidth=4);
+plot!(xlims=(0,3));
+plot!(ylims=(0,1));
+plot!(xlabel=L"r");
+annotate!(3*0.975,1*0.975,text("Ar",:right,:top,10));
+
+plot!(legend = false);
+
+p12 = plot(p1,p2,p3,p4,layout=(2,2));
+plot!(size=(550,350));
+
+p3 = plot([1,2,3]',label=["GD3-B3LYP/aug-cc-pVTZ" "Gaussian Approximation (ECP Fitted)" "Gaussian Approximation (Full E. Fitted)"],
+    linewidth=[2,4,4]',
+    linestyle=[:solid :dash :dash]);
+plot!(legend=:top,legendcolumns=1, framestyle=:none);
+
+plot(p3,p12,size=[550, 375],layout=grid(2, 1, heights=[0.1 ,0.9]))
