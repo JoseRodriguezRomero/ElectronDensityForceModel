@@ -366,15 +366,15 @@ end
 ECPCoeffs = GetECPCoeffs();
 FullECoeffs = GetFullECoeffs();
 
-cub_x = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(2)*"_X.cub");
-cub_y = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(2)*"_Y.cub");
-cub_z = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(2)*"_Z.cub");
+cub_x = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(1)*"_X.cub");
+cub_y = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(1)*"_Y.cub");
+cub_z = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(1)*"_Z.cub");
 cub_data = (cub_x + cub_y + cub_z)./3.0;
 
 # ECP Fit
 vars = zeros(Float64,6,1);
-vars[1:3] = ECPCoeffs[2,1:2:end];
-vars[4:6] = ECPCoeffs[2,2:2:end];
+vars[1:3] = ECPCoeffs[1,1:2:end];
+vars[4:6] = ECPCoeffs[1,2:2:end];
 
 plt_1 = 0.0 .* cub_data[:,1];
 for i in 1:3
@@ -385,8 +385,8 @@ end
 
 # Full E. Fit
 vars = zeros(Float64,18,1);
-vars[1:9] = FullECoeffs[2,1:2:end];
-vars[10:18] = FullECoeffs[2,2:2:end];
+vars[1:9] = FullECoeffs[1,1:2:end];
+vars[10:18] = FullECoeffs[1,2:2:end];
 
 plt_2 = 0.0 .* cub_data[:,1];
 for i in 1:9
@@ -399,14 +399,14 @@ p1 = plot(cub_data[:,1],cub_data[:,2],linewidth=2);
 plot!(cub_data[:,1],plt_1,linestyle=:dash,linewidth=4);
 plot!(cub_data[:,1],plt_2,linestyle=:dash,linewidth=4);
 plot!(xlims=(0,1.5));
-plot!(ylims=(0,4));
+plot!(ylims=(0,0.4));
 plot!(legend=false);
 
 plot!(ylabel=L"\rho \left( r \right)");
 plot!(xlabel=L"r");
 plot!(bottom_margin=1.75Plots.mm);
 plot!(left_margin=2.5Plots.mm);
-annotate!(1.5*0.975,4.0*0.975,text("He",:right,:top,10));
+annotate!(1.5*0.975,0.4*0.975,text("H",:right,:top,10));
 
 
 cub_x = ReadCubeFile("data_base_FullE/"*AtomicNumberElement(3)*"_X.cub");

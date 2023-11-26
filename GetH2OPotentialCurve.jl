@@ -63,6 +63,7 @@ function TIP3P_EnergyAtDistance(coord::String,dist::Real)
     # OO or OH reaction coordinates.
 
     density_file = "H2O_ecp_fitted_data.txt";
+    # density_file = "H2O_FullE_fitted_data.txt";
     a = ReadMolecule(density_file);
     b = ReadMolecule(density_file);
 
@@ -110,10 +111,9 @@ function TIP3P_EnergyAtDistance(coord::String,dist::Real)
     return minimum([energy,10.0]);
 end
 
-function EnergyAtDistanceOO(dist::Real,order::Int)
+function EnergyAtDistanceOO(dist::Real,order::Int,density_file::String)
     # Returns the energy of the uncorelated model of two molecules of water
     # on the OH reaction coordinate at distance dist.
-    density_file = "H2O_ecp_fitted_data.txt";
     a = ReadMolecule(density_file);
     b = ReadMolecule(density_file);
 
@@ -131,10 +131,22 @@ function EnergyAtDistanceOO(dist::Real,order::Int)
     return energies;
 end
 
-function EnergyAtDistanceOH(dist::Real,order::Int)
+function EnergyAtDistanceOO_ECP(dist::Real,order::Int)
     # Returns the energy of the uncorelated model of two molecules of water
     # on the OH reaction coordinate at distance dist.
-    density_file = "H2O_ecp_fitted_data.txt";
+    return EnergyAtDistanceOO(dist,order,"H2O_ecp_fitted_data.txt");
+end
+
+function EnergyAtDistanceOO_FullE(dist::Real,order::Int)
+    # Returns the energy of the uncorelated model of two molecules of water
+    # on the OH reaction coordinate at distance dist.
+    return EnergyAtDistanceOO(dist,order,"H2O_FullE_fitted_data.txt");
+end
+
+function EnergyAtDistanceOH(dist::Real,order::Int,density_file::String)
+    # Returns the energy of the uncorelated model of two molecules of water
+    # on the OH reaction coordinate at distance dist.
+    # density_file = "H2O_ecp_fitted_data.txt";
     a = ReadMolecule(density_file);
     b = ReadMolecule(density_file);
     
@@ -154,12 +166,26 @@ function EnergyAtDistanceOH(dist::Real,order::Int)
     return energies;
 end
 
+function EnergyAtDistanceOH_ECP(dist::Real,order::Int)
+    # Returns the energy of the uncorelated model of two molecules of water
+    # on the OH reaction coordinate at distance dist.
+    # density_file = "H2O_ecp_fitted_data.txt";
+    return EnergyAtDistanceOH(dist,order,"H2O_ecp_fitted_data.txt");
+end
+
+function EnergyAtDistanceOH_FullE(dist::Real,order::Int)
+    # Returns the energy of the uncorelated model of two molecules of water
+    # on the OH reaction coordinate at distance dist.
+    # density_file = "H2O_ecp_fitted_data.txt";
+    return EnergyAtDistanceOH(dist,order,"H2O_FullE_fitted_data.txt");
+end
+
 file_name = "Training Data/Gaussian Data/OH Coord/H2O.log";
 e0 = GetEnergyFromLogFile(file_name);
 surf_energy = zeros(Float64,0);
 react_coord = zeros(Float64,0);
 
-bond_θ = -π/4.0;
+bond_θ = -(π/2.0)*(13.0/25.0);
 str_react_coord = "OH";
 
 for i in 0:199
@@ -185,14 +211,18 @@ end
 a0 = 0.529177210903;
 surf_energy .-= 2.0*e0;
 
-model1_coord = (react_coord./a0);
+# model1_coord = (react_coord./a0);
 model1_coord = zeros(Float64,801,1);
 model1_coord[:] = collect(0:800) .* (12.0/800.0);
 
-order = 11;
+ECP_order = 7;
+FullE_order = 5;
+
+aux_MBPol_e = ReadMBPolValues();
 if str_react_coord == "OH"
     t = time();
-    all_model1_e = EnergyAtDistanceOH.(model1_coord,order);
+    ECP_all_model1_e = EnergyAtDistanceOH_ECP.(model1_coord,ECP_order);
+    FullE_all_model1_e = EnergyAtDistanceOH_FullE.(model1_coord,FullE_order);
     t = time() - t;
 
     println("Time taken (this model): "*string(t));
@@ -201,9 +231,12 @@ if str_react_coord == "OH"
     aux_UFF_e = ReadForceFieldValues(base_dir*"UFF_energies.txt");
     aux_GAFF_e = ReadForceFieldValues(base_dir*"GAFF_energies.txt");
     aux_MMFF94S_e = ReadForceFieldValues(base_dir*"MMFF94S_energies.txt");
+
+    aux_MBPol_e = aux_MBPol_e[13:25:5000];
 else
     t = time();
-    all_model1_e = EnergyAtDistanceOO.(model1_coord,order);
+    ECP_all_model1_e = EnergyAtDistanceOO_ECP.(model1_coord,ECP_order);
+    FullE_all_model1_e = EnergyAtDistanceOO_FullE.(model1_coord,FullE_order);
     t = time() - t;
     println("Time taken (this model): "*string(t));
 
@@ -211,6 +244,9 @@ else
     aux_UFF_e = ReadForceFieldValues(base_dir*"UFF_energies.txt");
     aux_GAFF_e = ReadForceFieldValues(base_dir*"GAFF_energies.txt");
     aux_MMFF94S_e = ReadForceFieldValues(base_dir*"MMFF94S_energies.txt");
+    aux_MBPol_e = ReadMBPolValues();
+
+    aux_MBPol_e = aux_MBPol_e[(5001):25:end];
 end
 
 aux_UFF_e = aux_UFF_e[13:25:end];
@@ -251,81 +287,63 @@ tip3p_e = TIP3P_EnergyAtDistance.(str_react_coord,model1_coord);
 t = time() - t;
 println("Time taken (TIP3P): "*string(t));
 
-all_model1_e = reduce(hcat,all_model1_e)';
-model1_e = all_model1_e[:,1];
-xc_model1 = all_model1_e[:,2:end];
+ECP_all_model1_e = reduce(hcat,ECP_all_model1_e)';
+ECP_model1_e = ECP_all_model1_e[:,1];
+ECP_xc_model1 = ECP_all_model1_e[:,2:end];
 
-# aux_params = xc_model1 \ (ecp_surf_energy-model1_e);
-# model1_e += xc_model1*aux_params
+FullE_all_model1_e = reduce(hcat,FullE_all_model1_e)';
+FullE_model1_e = FullE_all_model1_e[:,1];
+FullE_xc_model1 = FullE_all_model1_e[:,2:end];
 
-model1_params = GetXCCoeffs(order);
-model1_e += xc_model1*model1_params;
+model1_params_ECP = GetXCCoeffs_ECP(ECP_order);
+model1_params_FullE = GetXCCoeffs_FullE(FullE_order);
 
+ECP_model1_e += ECP_xc_model1*model1_params_ECP;
+FullE_model1_e += FullE_xc_model1*model1_params_FullE;
+
+aux_e_max = 200;
 model1_coord .*= a0;
-
-model1_coord = model1_coord[abs.(model1_e) .< 1.0E6];
-tip3p_e = tip3p_e[abs.(model1_e) .< 1.0E6];
-model1_e = model1_e[abs.(model1_e) .< 1.0E6];
+model1_coord = model1_coord[abs.(FullE_model1_e[:]) .< aux_e_max];
+tip3p_e = tip3p_e[abs.(FullE_model1_e[:]) .< aux_e_max];
+ECP_model1_e = ECP_model1_e[abs.(FullE_model1_e[:]) .< aux_e_max];
+FullE_model1_e = FullE_model1_e[abs.(FullE_model1_e[:]) .< aux_e_max];
 
 kjmol = 2625.5002;
 
 tip3p_e *= kjmol;
-model1_e *= kjmol;
+ECP_model1_e *= kjmol;
+FullE_model1_e *= kjmol;
 aux_UFF_e *= kjmol;
 aux_GAFF_e *= kjmol;
 surf_energy *= kjmol;
 aux_MMFF94S_e *= kjmol;
+aux_MBPol_e *= kjmol;
 
 l_width = 2.5;
-plot(react_coord,surf_energy,labels="CCSD(T)/cc-pVTZ",linewidth=l_width);
-plot!(model1_coord,model1_e,labels="This Work",linewidth=l_width);
-plot!(react_coord,aux_UFF_e,labels="UFF",linewidth=l_width,linestyle=:dashdot);
-plot!(react_coord,aux_GAFF_e,labels="GAFF",linewidth=l_width,linestyle=:dashdotdot);
-plot!(react_coord,aux_MMFF94S_e,labels="MMFF94S",linewidth=l_width,linestyle=:dash);
-plot!(model1_coord,tip3p_e,labels="TIP3P",linewidth=l_width,linestyle=:dot);
+legends = ["CCSD(T)/cc-pVTZ";"This Work (ECP fit)";
+"This Work (Full E. fit)";"GAFF";"MMFF94S";"TIP3P";"MB-Pol"];
 
-# plot(model1_coord,model1_e,labels="This Work",linewidth=l_width);
-# plot!(react_coord,surf_energy,labels="CCSD(T)/cc-pVTZ",linewidth=l_width);
+# p1 = plot(react_coord,label=legends[1],surf_energy,linewidth=l_width);
+# plot!(model1_coord,ECP_model1_e,label=legends[2],linewidth=l_width,linestyle=:dot);
+# plot!(model1_coord,FullE_model1_e,label=legends[3],linewidth=l_width);
+# plot!(react_coord,aux_GAFF_e,label=legends[4],linewidth=l_width,linestyle=:dashdotdot);
+# plot!(react_coord,aux_MMFF94S_e,label=legends[5],linewidth=l_width,linestyle=:dash);
+# plot!(model1_coord,tip3p_e,label=legends[6],linewidth=l_width,linestyle=:dot);
+# plot!(react_coord,aux_MBPol_e,label=legends[7],linewidth=l_width,linestyle=:dash);
 
-# all_e_order_5 = EnergyAtDistanceOH.(model1_coord,5);
-# all_e_order_3 = EnergyAtDistanceOH.(model1_coord,3);
-
-# a0 = 0.529177210903;
-# all_e_order_5 = reduce(hcat,all_e_order_5)';
-# order_5_e = all_e_order_5[:,1];
-# xc_order_5 = all_e_order_5[:,2:end];
-# order_5_params = GetXCCoeffs(5);
-# order_5_e += xc_order_5*order_5_params;
-
-# a0 = 0.529177210903;
-# all_e_order_3 = reduce(hcat,all_e_order_3)';
-# order_3_e = all_e_order_3[:,1];
-# xc_order_3 = all_e_order_3[:,2:end];
-# order_3_params = GetXCCoeffs(3);
-# order_3_e += xc_order_3*order_3_params;
-
-# model1_coord .*= a0;
-# p2 = plot(ecp_coord,ecp_surf_energy,linewidth=2,label=false);
-# plot!(model1_coord,order_5_e,labels="Order 5",linewidth=3,linestyle=:dash);
-# plot!(model1_coord,order_3_e,labels="Order 3",linewidth=3,linestyle=:dot);
-
-plot!(xlabel=L"\Delta L \ \ [\AA]");
-# plot!(ylabel=L"\Delta E \ \ [\textrm{Hartree}]");
-plot!(size=(280,175));
-plot!(legend = :topright);
-# plot!(margin=2.5Plots.mm);
-plot!(bottom_margin=2Plots.mm);
-plot!(left_margin=2Plots.mm);
+plot(model1_coord,ECP_model1_e,labels=legends[2],linewidth=l_width);
+plot!(model1_coord,FullE_model1_e,labels=legends[3],linewidth=l_width);
+plot!(react_coord,surf_energy,labels=legends[1],linewidth=l_width);
 
 if str_react_coord == "OH"
-    # plot!(ylims=(-50,400),xlims=(0,5));
-    # plot!(yticks=0:100:400);
+    plot!(ylims=(-50,1000),xlims=(0.5,2));
+    plot!(yticks=0:250:1000);
 
-    plot!(ylims=(-30,30),xlims=(1,5));
-    plot!(yticks=-30:15:30);
+    # plot!(ylims=(-30,0),xlims=(1,4));
+    # plot!(yticks=-30:15:0);
 else
-    plot!(ylims=(-50,150),xlims=(1.5,5));
-    plot!(yticks=-50:100:150);
+    plot!(ylims=(-50,650),xlims=(1.0,3.5));
+    plot!(yticks=-50:200:650);
 
     # plot!(ylims=(-50,600),xlims=(0,5));
     # plot!(yticks=0:150:600);
@@ -335,7 +353,13 @@ end
 
 plot!(xlabel=L"\Delta L \ \ [\AA]");
 plot!(ylabel=L"\Delta E \ \ [\textrm{kJ/mol}]");
-plot!(size=(550,175));
-plot!(legend = :outertopright);
-plot!(left_margin=4Plots.mm);
-plot!(bottom_margin=5Plots.mm)
+
+# plot!(xticks=(1:4,[]));
+# plot!(xlabel="");
+
+plot!(size=(450,225));
+# plot!(legend=:outertop,legendcolumns=3);
+plot!(left_margin=2Plots.mm);
+plot!(bottom_margin=2Plots.mm,top_margin=2Plots.mm)
+# plot!(legend=:outertop, legendguide=:bottomright)
+# plot!(top_margin=5Plots.mm)

@@ -308,7 +308,7 @@ for i in 1:3
 end
 @printf fileID "\n";
 
-for i in 18:18
+for i in 1:1
     @printf fileID "%10s " AtomicNumberElement(i);
     cub_x = ReadCubeFile("data_base_ecp/"*AtomicNumberElement(i)*"_X.cub");
     cub_y = ReadCubeFile("data_base_ecp/"*AtomicNumberElement(i)*"_Y.cub");
@@ -321,14 +321,14 @@ for i in 18:18
 
     global atomic_number = charges[2];
 
-    init_val = zeros(Float64,6);
-    init_val[4] = -0.0885025162;
-    init_val[5] = 0.0033711274;
-    init_val[6] = 1.0851313739;
+    init_val = rand(Float64,6);
+    # init_val[4] = -0.0885025162;
+    # init_val[5] = 0.0033711274;
+    # init_val[6] = 1.0851313739;
 
-    init_val[1] = 0.6580144264;
-    init_val[2] = 2.4530410267;
-    init_val[3] = 0.1009967429;
+    # init_val[1] = 0.6580144264;
+    # init_val[2] = 2.4530410267;
+    # init_val[3] = 0.1009967429;
 
     init_val .*= 8.0;
     init_val[1:3] .*= (3.0 .+ 2.0.*rand(Float64,3))./4.0;

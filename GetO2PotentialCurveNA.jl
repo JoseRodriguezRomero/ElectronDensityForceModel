@@ -2,74 +2,119 @@ using Plots, SpecialFunctions, LaTeXStrings
 include("GetPotentialFromAngles.jl")
 include("ProcessFittingData.jl")
 
-# function GetEnergyFromLogFile(file_name::String)
-#     # Reads the energy (in Hartree) of the molecule from the log file specified
-#     # by file_name.
-#     energy = 0.0;
+function MakeO2AnionHalfMolecFile()
+    # Creates an easy to read pair of files for a monomer of water so 
+    # that its partial charges match the Mulliken charges of a vacuum 
+    # QM calculation.
+    ECPData = GetECPCoeffs();
+    FullEData = GetFullECoeffs();
 
-#     if !isfile(file_name)
-#         return 0;
-#     end
+    # Mulliken charges from ab initio CCSD(T)/CEP-31G
+    ρO_ECP = -0.250000;
 
-#     fileID = open(file_name,"r");
+    # Mulliken charges from ab initio CCSD(T)/aug-cc-pVTZ
+    ρO_FullE = -0.250000;
 
-#     valid = false;
+    fileID1 = open("O2_ecp_anion_half_data.txt","w");
+    fileID2 = open("O2_fullE_anion_half_data.txt","w");
 
-#     for line in readlines(fileID)
-#         if contains(line,"E(CCSD(T))             ")
-#             energy = parse(Float64,split(line)[end]);
-#         end
+    @printf fileID1 "%18s " "atom_x";
+    @printf fileID1 "%18s " "atom_y";
+    @printf fileID1 "%18s " "atom_z";
+    @printf fileID1 " %18s" "atom_Num \n";
 
-#         if contains(line,"****ORCA TERMINATED NORMALLY****")
-#             valid = true;
-#         end
-#     end
+    @printf fileID2 "%18s " "atom_x";
+    @printf fileID2 "%18s " "atom_y";
+    @printf fileID2 "%18s " "atom_z";
+    @printf fileID2 " %18s" "atom_Num \n";
 
-#     if !valid
-#         print("Problem with file: "*file_name*"\n");
-#     end
+    O1_coords = [ 1.2052748812,0.0,0.0];
+    O2_coords = [-1.2052748812,0.0,0.0];
 
-#     close(fileID);
-#     return energy
-# end
+    # Atomic Data
+    # ECP
+    @printf fileID1 "%18.10f " O1_coords[1];
+    @printf fileID1 "%18.10f " O1_coords[2];
+    @printf fileID1 "%18.10f " O1_coords[3];
+    @printf fileID1 "%18.10f \n" 6.0;
 
-# function GetGeometryFromLogFile(file_name::String)
-#     # Reads the geometry of the molecule from the ORCA logfile specified by 
-#     # file_name.
-#     geometry = zeros(Float64,0,0);
+    @printf fileID1 "%18.10f " O2_coords[1];
+    @printf fileID1 "%18.10f " O2_coords[2];
+    @printf fileID1 "%18.10f " O2_coords[3];
+    @printf fileID1 "%18.10f \n" 6.0;
 
-#     if !isfile(file_name)
-#         return geometry;
-#     end
+    # Full Electron
+    @printf fileID2 "%18.10f " O1_coords[1];
+    @printf fileID2 "%18.10f " O1_coords[2];
+    @printf fileID2 "%18.10f " O1_coords[3];
+    @printf fileID2 "%18.10f \n" 8.0;
 
-#     fileID = open(file_name,"r");
-#     lines = readlines(fileID);
-#     for i in 1:lastindex(lines)
-#         line = lines[i];
+    @printf fileID2 "%18.10f " O2_coords[1];
+    @printf fileID2 "%18.10f " O2_coords[2];
+    @printf fileID2 "%18.10f " O2_coords[3];
+    @printf fileID2 "%18.10f \n" 8.0;
+    # Atomic Data
 
-#         if contains(line,"CARTESIAN COORDINATES (ANGSTROEM)")
-#             j = i + 2;
-#             geometry = zeros(Float64,0,3);
-#             while true
-#                 line = lines[j];
-#                 if length(split(line)) == 0
-#                     break;
-#                 end
+    @printf fileID1 "\n"
+    @printf fileID2 "\n";
 
-#                 line_splitted = split(line);
-#                 x = parse(Float64,line_splitted[2]);
-#                 y = parse(Float64,line_splitted[3]);
-#                 z = parse(Float64,line_splitted[4]);
-#                 geometry = [geometry; [x,y,z]'];
+    @printf fileID1 "%18s " "center_x";
+    @printf fileID1 "%18s " "center_y";
+    @printf fileID1 "%18s " "center_z";
+    @printf fileID1 "%25s " "amplitude";
+    @printf fileID1 "%25s" "decay\n";
 
-#                 j += 1;
-#             end
-#         end
-#     end
+    @printf fileID2 "%18s " "center_x";
+    @printf fileID2 "%18s " "center_y";
+    @printf fileID2 "%18s " "center_z";
+    @printf fileID2 "%25s " "amplitude";
+    @printf fileID2 "%25s" "decay\n";
 
-#     close(fileID);
-#     return geometry;
-# end
+    # Electrons Data
+    # ECP
+    aux_ecp_mat = zeros(Float64,6,5);
+    aux_fullE_mat = zeros(Float64,18,5);
+
+    aux_ecp_mat[1:3,1:3] .= O1_coords';
+    aux_ecp_mat[1:3,4] .= (((6.0-ρO_ECP)/6.0).*ECPData[8,1:2:end]);
+    aux_ecp_mat[1:3,5] .= ECPData[8,2:2:end];
+
+    aux_ecp_mat[4:6,1:3] .= O2_coords';
+    aux_ecp_mat[4:6,4] .= (((6.0-ρO_ECP)/6.0).*ECPData[8,1:2:end]);
+    aux_ecp_mat[4:6,5] .= ECPData[8,2:2:end];
+
+    for i in 1:6
+        @printf fileID1 "%18.10f " aux_ecp_mat[i,1];
+        @printf fileID1 "%18.10f " aux_ecp_mat[i,2];
+        @printf fileID1 "%18.10f " aux_ecp_mat[i,3];
+
+        @printf fileID1 "%25.10f " aux_ecp_mat[i,4];
+        @printf fileID1 "%25.10f \n" aux_ecp_mat[i,5];
+    end
+
+    # Full Electron
+    aux_fullE_mat[1:9,1:3] .= O1_coords';
+    aux_fullE_mat[1:9,4] .= (((8.0-ρO_FullE)/8.0).*FullEData[8,1:2:end]);
+    aux_fullE_mat[1:9,5] .= FullEData[8,2:2:end];
+
+    aux_fullE_mat[10:18,1:3] .= O2_coords';
+    aux_fullE_mat[10:18,4] .= (((8.0-ρO_FullE)/8.0).*FullEData[8,1:2:end]);
+    aux_fullE_mat[10:18,5] .= FullEData[8,2:2:end];
+
+    for i in 1:18
+        @printf fileID2 "%18.10f " aux_fullE_mat[i,1];
+        @printf fileID2 "%18.10f " aux_fullE_mat[i,2];
+        @printf fileID2 "%18.10f " aux_fullE_mat[i,3];
+
+        @printf fileID2 "%25.10f " aux_fullE_mat[i,4];
+        @printf fileID2 "%25.10f \n" aux_fullE_mat[i,5];
+    end
+    # Electrons Data
+
+    close(fileID1);
+    close(fileID2);
+    return;
+end
 
 function GetEnergyFromLogFile(file_name::String)
     # Reads the energy (in Hartree) of the molecule from the log file specified
@@ -131,13 +176,33 @@ function GetGeometryFromLogFile(file_name::String)
     return geometry;
 end
 
-function EnergyAtDistanceOO(dist::Real,order::Int)
+function EnergyAtDistanceOO_ECP(dist::Real,order::Int)
     # Returns the energy of the uncorelated model of two molecules of water
     # on the OH reaction coordinate at distance dist.
-    density_file_1 = "O2_anion_data.txt";
-    density_file_2 = "O2_ecp_fitted_data.txt";
-    a = ReadMolecule(density_file_1);
-    b = ReadMolecule(density_file_2);
+    file1 = "O2_ecp_anion_data.txt";
+    file2 = "O2_ecp_fitted_data.txt";
+
+    # file1 = "O2_ecp_anion_half_data.txt";
+    # file2 = "O2_ecp_anion_half_data.txt";
+    return EnergyAtDistanceOO(dist,order,file1,file2);
+end
+
+function EnergyAtDistanceOO_FullE(dist::Real,order::Int)
+    # Returns the energy of the uncorelated model of two molecules of water
+    # on the OH reaction coordinate at distance dist.
+    file1 = "O2_fullE_anion_data.txt";
+    file2 = "O2_fullE_fitted_data.txt";
+
+    # file1 = "O2_fullE_anion_half_data.txt";
+    # file2 = "O2_fullE_anion_half_data.txt";
+    return EnergyAtDistanceOO(dist,order,file1,file2);
+end
+
+function EnergyAtDistanceOO(dist::Real,order::Int,file1::String,file2::String)
+    # Returns the energy of the uncorelated model of two molecules of water
+    # on the OH reaction coordinate at distance dist.
+    a = ReadMolecule(file1);
+    b = ReadMolecule(file2);
 
     CenterAtAtomIndex!(a,2);
     CenterAtAtomIndex!(b,1);
@@ -194,23 +259,29 @@ surf_energy .-= e0;
 model1_coord = react_coord[:,1]./a0;
 model1_coord = (collect(0:800) .* (8.0/800)) .+ 2.0;
 
-order = 11;
-t = time();
-all_model1_e = EnergyAtDistanceOO.(model1_coord,order);
-t = time() - t;
-println("Time taken (this model): "*string(t));
+ECP_order = 7;
+all_model1_e_ECP = EnergyAtDistanceOO_ECP.(model1_coord,ECP_order);
+all_model1_e_ECP = reduce(hcat,all_model1_e_ECP)';
+xc_model1_ECP = all_model1_e_ECP[:,2:end];
 
-all_model1_e = reduce(hcat,all_model1_e)';
-xc_model1 = all_model1_e[:,2:end];
+model1_params1_ECP = GetXCCoeffs_ECP(ECP_order);
+model1_e1_ECP = copy(all_model1_e_ECP[:,1]);
+model1_e1_ECP += xc_model1_ECP*model1_params1_ECP;
 
-model1_params1 = GetXCCoeffs(order);
-model1_e1 = copy(all_model1_e[:,1]);
-model1_e1 += xc_model1*model1_params1;
+FullE_order = 5;
+all_model1_e_FullE = EnergyAtDistanceOO_FullE.(model1_coord,FullE_order);
+all_model1_e_FullE = reduce(hcat,all_model1_e_FullE)';
+xc_model1_FullE = all_model1_e_FullE[:,2:end];
+
+model1_params1_FullE = GetXCCoeffs_FullE(FullE_order);
+model1_e1_FullE = copy(all_model1_e_FullE[:,1]);
+model1_e1_FullE += xc_model1_FullE*model1_params1_FullE;
 
 model1_coord .*= a0;
 
 kjmol = 2625.5002;
-model1_e1 *= kjmol;
+model1_e1_ECP *= kjmol;
+model1_e1_FullE *= kjmol;
 surf_energy *= kjmol;
 
 l_width = 2.5;
@@ -219,18 +290,20 @@ plot(react_coord[:,2],surf_energy[:,2],labels="ROCCSD(T)/cc-pVTZ (2S+1=4)",linew
 # plot!(react_coord[:,3],surf_energy[:,3],labels="ROCCSD(T)/cc-pVTZ (2S+1=6)",linewidth=l_width);
 
 # plot(react_coord[:,1],minimum(surf_energy,dims=2),labels="ROCCSD(T)/cc-pVTZ",linewidth=l_width);
-plot!(model1_coord,model1_e1,labels="This Work",linewidth=l_width);
+plot!(model1_coord,model1_e1_FullE,labels="This Work (Full E. fit)",linewidth=l_width);
+plot!(model1_coord,model1_e1_ECP,labels="This Work (ECP fit)",linewidth=l_width);
 
-plot!(ylims=[-40,75],xlims=[1.5,5]);
+
+plot!(ylims=[-40,150],xlims=[1.5,5]);
 plot!(xticks=2:1:5);
-plot!(yticks=-25:25:75);
+# plot!(yticks=-25:25:75);
 
 # plot!(ylims=[-.02,0.04],xlims=[1.75,4]);
 # plot!(yticks=-0.02:0.02:0.04);
 
 plot!(xlabel=L"\Delta L \ \ [\AA]");
 plot!(ylabel=L"\Delta E \ \ [\textrm{kJ/mol}]");
-plot!(size=(550,175));
-plot!(legend = :outertopright);
-plot!(left_margin=4Plots.mm);
-plot!(bottom_margin=5Plots.mm)
+plot!(size=(450,225));
+# plot!(legend = :outertopright);
+# plot!(left_margin=4Plots.mm);
+# plot!(bottom_margin=5Plots.mm)
