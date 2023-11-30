@@ -416,7 +416,6 @@ function ReadMBPolValues()
     for i in 1:num_pts
         line_splitted = split(lines[i+1]);
         if length(line_splitted) < 2
-            energy = energy[1:(i-1)];
             break;
         end
         energy[i] = parse(Float64,line_splitted[end]) - 2.0*e0;
@@ -424,6 +423,30 @@ function ReadMBPolValues()
 
     close(fileID);
     return energy.*kCalMol_to_Hartree;
+end
+
+function ReadEFPValues()
+    # This function is intended to read the interaction energies obtained by
+    # the Effective Fragment Potential (EFP) model.
+    file_name = "Training Data/EFP Data/EFP_energies.txt";
+    fileID = open(file_name,"r");
+    lines = readlines(fileID);
+    line_splitted = split(lines[1]);
+
+    num_pts = length(lines);
+    energy = zeros(Float64,num_pts,1);
+    kCalMol_to_Hartree = 0.0015936011;
+    for i in 1:num_pts
+        line_splitted = split(lines[i]);
+        if length(line_splitted) < 2
+            break;
+        end
+        energy[i] = parse(Float64,line_splitted[end]);
+    end
+
+    close(fileID);
+    #return energy.*kCalMol_to_Hartree;
+    return energy;
 end
 
 function RefVals(order::Int,file_nanme::String)
@@ -513,6 +536,7 @@ function CompData()
         MMFF94S_e = [MMFF94S_e; aux_MMFF94S_e];
     end
 
+    aux_EFP_e = ReadEFPValues();
     aux_MBPol_e = ReadMBPolValues();
 
     mark_size = 0.5.*ones(Float64,length(gauss_e));
@@ -530,6 +554,7 @@ function CompData()
     UFF_e *= kjmol;
     GAFF_e *= kjmol;
     gauss_e *= kjmol;
+    aux_EFP_e *= kjmol;
     MMFF94S_e *= kjmol;
     aux_MBPol_e *= kjmol;
 
@@ -587,7 +612,17 @@ function CompData()
     plot!(yticks=(aux_range,aux_range));
     plot!(xticks=(aux_range,aux_range));
 
-    plot(p1,p2,p3,p4,p5,layout=l);
+    aux_text = "EFP\nR² = ";
+    aux_text *= string(round(GetDetCoeff(hcat(gauss_e,aux_EFP_e)),digits=5));
+    p6 = scatter(gauss_e,aux_EFP_e,markersize=mark_size,legend = false);
+    plot!(xlims=(min_range, max_e),ylims=(min_range, max_e));
+    annotate!(txX,txY,text(aux_text,:center,:right,8));
+    plot!([min_range, max_e],[min_range, max_e]);
+    plot!(xlabel="CCSD(T) [kJ/mol]");
+    plot!(yticks=(aux_range,[]));
+    plot!(xticks=(aux_range,aux_range));
+
+    plot(p1,p2,p3,p4,p5,p6,layout=l);
     plot!(size=(585,425));
     plot!(xguidefontsize=8);
     plot!(yguidefontsize=8)
@@ -595,6 +630,24 @@ function CompData()
 
     plot!(dpi=1000);
     savefig("comps.png");
+
+    aux_text = "Order = 6\nThis Work (ECP fit)\nR² = ";
+    aux_text *= string(round(GetDetCoeff(mat_ECP),digits=5));
+    p = scatter(gauss_e,mat_ECP[:,2],markersize=mark_size,legend = false);
+    plot!(xlims=(min_range, max_e),ylims=(min_range, max_e));
+    annotate!(txX,txY+40,text(aux_text,:center,:right,8));
+    plot!([min_range, max_e],[min_range, max_e]);
+    plot!(ylabel="Force Field\n[kJ/mol]");
+    plot!(xlabel="CCSD(T) [kJ/mol]");
+    plot!(left_margin=5.5Plots.mm);
+    plot!(xticks=(aux_range,aux_range));
+    plot!(yticks=(aux_range,aux_range));
+    plot!(xguidefontsize=8);
+    plot!(yguidefontsize=8);
+
+    plot!(size=(325,175));
+    plot!(dpi=1000);
+    savefig("toc.png");
 end
 
 function CompErrorsECP()

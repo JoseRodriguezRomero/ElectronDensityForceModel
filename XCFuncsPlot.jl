@@ -20,20 +20,32 @@ end
 λ2 = 1.65;
 
 λ = (λ1*λ2)/(λ1+λ2);
-
 l = collect((10.0/300.0).*(0:300));
 
-x0 = XCOrder0.(λ,l)./XCOrder0.(λ,0);
-x1 = XCOrder1.(λ,l)./XCOrder1.(λ,0);
-x2 = XCOrder2.(λ,l)./XCOrder2.(λ,0);
-x3 = XCOrder3.(λ,l)./XCOrder3.(λ,0);
-x4 = XCOrder4.(λ,l)./XCOrder4.(λ,0);
-x5 = XCOrder5.(λ,l)./XCOrder5.(λ,0);
-x6 = XCOrder6.(λ,l)./XCOrder6.(λ,0);
-x7 = XCOrder7.(λ,l)./XCOrder7.(λ,0);
-x8 = XCOrder8.(λ,l)./XCOrder8.(λ,0);
-x9 = XCOrder9.(λ,l)./XCOrder9.(λ,0);
-x10 = XCOrder10.(λ,l)./XCOrder10.(λ,0);
+x0 = XCOrder0.(λ,l)./XCOrder0.(λ,0.000001);
+x1 = (exp.(-λ.*(l.^2.0)).*XCOrder1.(λ,l))./XCOrder1.(λ,0);
+x2 = (exp.(-λ.*(l.^2.0)).*XCOrder2.(λ,l))./XCOrder2.(λ,0);
+x3 = (exp.(-λ.*(l.^2.0)).*XCOrder3.(λ,l))./XCOrder3.(λ,0);
+x4 = (exp.(-λ.*(l.^2.0)).*XCOrder4.(λ,l))./XCOrder4.(λ,0);
+x5 = (exp.(-λ.*(l.^2.0)).*XCOrder5.(λ,l))./XCOrder5.(λ,0);
+x6 = (exp.(-λ.*(l.^2.0)).*XCOrder6.(λ,l))./XCOrder6.(λ,0);
+x7 = (exp.(-λ.*(l.^2.0)).*XCOrder7.(λ,l))./XCOrder7.(λ,0);
+x8 = (exp.(-λ.*(l.^2.0)).*XCOrder8.(λ,l))./XCOrder8.(λ,0);
+x9 = (exp.(-λ.*(l.^2.0)).*XCOrder9.(λ,l))./XCOrder9.(λ,0);
+x10 = (exp.(-λ.*(l.^2.0)).*XCOrder10.(λ,l))./XCOrder10.(λ,0);
+
+
+# x0 = XCOrder0.(λ,l)./XCOrder0.(λ,0);
+# x1 = (XCOrder1.(λ,l))./XCOrder1.(λ,0);
+# x2 = (XCOrder2.(λ,l))./XCOrder2.(λ,0);
+# x3 = (XCOrder3.(λ,l))./XCOrder3.(λ,0);
+# x4 = (XCOrder4.(λ,l))./XCOrder4.(λ,0);
+# x5 = (XCOrder5.(λ,l))./XCOrder5.(λ,0);
+# x6 = (XCOrder6.(λ,l))./XCOrder6.(λ,0);
+# x7 = (XCOrder7.(λ,l))./XCOrder7.(λ,0);
+# x8 = (XCOrder8.(λ,l))./XCOrder8.(λ,0);
+# x9 = (XCOrder9.(λ,l))./XCOrder9.(λ,0);
+# x10 = (XCOrder10.(λ,l))./XCOrder10.(λ,0);
 
 
 # x0 = XCOrderEN0.(λ1,l)./XCOrderEN0.(λ1,0);

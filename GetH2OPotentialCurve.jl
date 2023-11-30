@@ -219,6 +219,7 @@ ECP_order = 7;
 FullE_order = 5;
 
 aux_MBPol_e = ReadMBPolValues();
+aux_EFP_e = ReadEFPValues();
 if str_react_coord == "OH"
     t = time();
     ECP_all_model1_e = EnergyAtDistanceOH_ECP.(model1_coord,ECP_order);
@@ -233,6 +234,7 @@ if str_react_coord == "OH"
     aux_MMFF94S_e = ReadForceFieldValues(base_dir*"MMFF94S_energies.txt");
 
     aux_MBPol_e = aux_MBPol_e[13:25:5000];
+    aux_EFP_e = aux_EFP_e[13:25:5000];
 else
     t = time();
     ECP_all_model1_e = EnergyAtDistanceOO_ECP.(model1_coord,ECP_order);
@@ -247,6 +249,7 @@ else
     aux_MBPol_e = ReadMBPolValues();
 
     aux_MBPol_e = aux_MBPol_e[(5001):25:end];
+    aux_EFP_e = aux_EFP_e[(5001):25:end];
 end
 
 aux_UFF_e = aux_UFF_e[13:25:end];
@@ -301,7 +304,7 @@ model1_params_FullE = GetXCCoeffs_FullE(FullE_order);
 ECP_model1_e += ECP_xc_model1*model1_params_ECP;
 FullE_model1_e += FullE_xc_model1*model1_params_FullE;
 
-aux_e_max = 200;
+aux_e_max = 2;
 model1_coord .*= a0;
 model1_coord = model1_coord[abs.(FullE_model1_e[:]) .< aux_e_max];
 tip3p_e = tip3p_e[abs.(FullE_model1_e[:]) .< aux_e_max];
@@ -318,31 +321,33 @@ aux_GAFF_e *= kjmol;
 surf_energy *= kjmol;
 aux_MMFF94S_e *= kjmol;
 aux_MBPol_e *= kjmol;
+aux_EFP_e *= kjmol;
 
 l_width = 2.5;
 legends = ["CCSD(T)/cc-pVTZ";"This Work (ECP fit)";
-"This Work (Full E. fit)";"GAFF";"MMFF94S";"TIP3P";"MB-Pol"];
+"This Work (Full E. fit)";"GAFF";"MMFF94S";"TIP3P";"MB-Pol";"EFP"];
 
-# p1 = plot(react_coord,label=legends[1],surf_energy,linewidth=l_width);
-# plot!(model1_coord,ECP_model1_e,label=legends[2],linewidth=l_width,linestyle=:dot);
-# plot!(model1_coord,FullE_model1_e,label=legends[3],linewidth=l_width);
-# plot!(react_coord,aux_GAFF_e,label=legends[4],linewidth=l_width,linestyle=:dashdotdot);
-# plot!(react_coord,aux_MMFF94S_e,label=legends[5],linewidth=l_width,linestyle=:dash);
-# plot!(model1_coord,tip3p_e,label=legends[6],linewidth=l_width,linestyle=:dot);
-# plot!(react_coord,aux_MBPol_e,label=legends[7],linewidth=l_width,linestyle=:dash);
+p1 = plot(react_coord,label=legends[1],surf_energy,linewidth=l_width);
+plot!(model1_coord,ECP_model1_e,label=legends[2],linewidth=l_width,linestyle=:dot);
+plot!(model1_coord,FullE_model1_e,label=legends[3],linewidth=l_width);
+plot!(react_coord,aux_GAFF_e,label=legends[4],linewidth=l_width,linestyle=:dashdotdot);
+plot!(react_coord,aux_MMFF94S_e,label=legends[5],linewidth=l_width,linestyle=:dash);
+plot!(model1_coord,tip3p_e,label=legends[6],linewidth=l_width,linestyle=:dot);
+plot!(react_coord,aux_MBPol_e,label=legends[7],linewidth=l_width,linestyle=:dash);
+plot!(react_coord,aux_EFP_e,label=legends[8],linewidth=l_width,linestyle=:dot);
 
-plot(model1_coord,ECP_model1_e,labels=legends[2],linewidth=l_width);
-plot!(model1_coord,FullE_model1_e,labels=legends[3],linewidth=l_width);
-plot!(react_coord,surf_energy,labels=legends[1],linewidth=l_width);
+# plot(model1_coord,ECP_model1_e,labels=legends[2],linewidth=l_width);
+# plot!(model1_coord,FullE_model1_e,labels=legends[3],linewidth=l_width);
+# plot!(react_coord,surf_energy,labels=legends[1],linewidth=l_width);
 
 if str_react_coord == "OH"
-    plot!(ylims=(-50,1000),xlims=(0.5,2));
-    plot!(yticks=0:250:1000);
+    # plot!(ylims=(-50,1000),xlims=(0.5,2));
+    # plot!(yticks=0:250:1000);
 
-    # plot!(ylims=(-30,0),xlims=(1,4));
-    # plot!(yticks=-30:15:0);
+    plot!(ylims=(-30,0),xlims=(1.25,4));
+    plot!(yticks=-30:15:0);
 else
-    plot!(ylims=(-50,650),xlims=(1.0,3.5));
+    plot!(ylims=(-50,650),xlims=(1.5,3.5));
     plot!(yticks=-50:200:650);
 
     # plot!(ylims=(-50,600),xlims=(0,5));
@@ -357,8 +362,8 @@ plot!(ylabel=L"\Delta E \ \ [\textrm{kJ/mol}]");
 # plot!(xticks=(1:4,[]));
 # plot!(xlabel="");
 
-plot!(size=(450,225));
-# plot!(legend=:outertop,legendcolumns=3);
+plot!(size=(525,255));
+plot!(legend=:outertop,legendcolumns=3);
 plot!(left_margin=2Plots.mm);
 plot!(bottom_margin=2Plots.mm,top_margin=2Plots.mm)
 # plot!(legend=:outertop, legendguide=:bottomright)
